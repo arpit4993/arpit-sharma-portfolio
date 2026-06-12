@@ -140,7 +140,6 @@ export default function HomePage() {
     }
 
     fetchProjects()
-    console.log("Projects:", projectsData)
 
     window.addEventListener(
       "scroll",
@@ -628,7 +627,7 @@ export default function HomePage() {
 
 <section
   id="portfolio"
-  className="py-32 px-6 lg:px-10"
+  className="py-32 px-6 lg:px-10 section-hidden"
 >
   <div className="max-w-7xl mx-auto">
 
@@ -1347,7 +1346,7 @@ ${
 )}
       <section
         id="contact"
-        className="py-28 px-6 lg:px-10"
+        className="py-28 px-6 lg:px-10 section-hidden"
       >
         <div className="max-w-5xl mx-auto text-center">
           <p className="uppercase tracking-[0.3em] text-sm text-white/50 mb-6">
