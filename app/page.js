@@ -140,6 +140,7 @@ export default function HomePage() {
     }
 
     fetchProjects()
+    console.log("Projects:", projectsData)
 
     window.addEventListener(
       "scroll",
