@@ -5,6 +5,9 @@ import { useEffect, useState } from "react"
 import {
   collection,
   getDocs,
+  limit,
+  query,
+
 } from "firebase/firestore"
 
 import { db } from "@/lib/firebase"
@@ -13,6 +16,14 @@ export default function HomePage() {
   const [projects, setProjects] = useState(0)
   const [clients, setClients] = useState(0)
   const [years, setYears] = useState(0)
+  const [hero, setHero] = useState(null)
+  const [about, setAbout] = useState(null)
+  const [experience, setExperience] = useState([])
+  const [services, setServices] = useState([])
+  const [categories, setCategories] = useState([])
+  const [contact, setContact] = useState(null)
+  const [footer, setFooter] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   const [
     portfolioProjects,
@@ -92,12 +103,12 @@ export default function HomePage() {
       if (!timeline) return
 
       const section =
-        document.querySelector(
-          "#experience"
-        )
+  document.querySelector("#experience");
 
-      const rect =
-        section.getBoundingClientRect()
+if (!section) return;
+
+const rect =
+  section.getBoundingClientRect();
 
       const windowHeight =
         window.innerHeight
@@ -116,12 +127,189 @@ export default function HomePage() {
       }%`
     }
 
+    const fetchHero = async () => {
+  try {
+
+    const snapshot = await getDocs(
+      query(
+        collection(db, "hero"),
+        limit(1)
+      )
+    )
+
+    if (!snapshot.empty) {
+
+      setHero(snapshot.docs[0].data())
+
+    }
+
+  } catch (error) {
+
+    console.log(error)
+
+  }
+}
+
+const fetchAbout = async () => {
+
+  try {
+
+    const snapshot = await getDocs(
+      query(
+        collection(db, "about"),
+        limit(1)
+      )
+    )
+
+    if (!snapshot.empty) {
+
+      setAbout(snapshot.docs[0].data())
+
+    }
+
+  } catch (error) {
+
+    console.log(error)
+
+  }
+
+}
+
+const fetchExperience = async () => {
+  try {
+
+    console.log("fetchExperience called");
+
+    const snapshot = await getDocs(
+      collection(db, "experience")
+    );
+
+    console.log(snapshot.docs);
+
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    console.log("Experience =>", data);
+
+    data.sort((a, b) => Number(a.year) - Number(b.year));
+
+    setExperience(data);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const fetchServices = async () => {
+  try {
+
+    console.log("fetchServices called");
+
+    const snapshot = await getDocs(
+      collection(db, "services")
+    );
+
+    console.log(snapshot.docs);
+
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    console.log("Services =>", data);
+
+    setServices(data);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const fetchCategories = async () => {
+
+  try {
+
+    const snapshot = await getDocs(
+      collection(db, "portfolioCategories")
+    );
+
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    data.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+
+    setCategories(data);
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+};
+
+const fetchContact = async () => {
+
+  try {
+
+    const snapshot = await getDocs(
+      query(
+        collection(db, "contact"),
+        limit(1)
+      )
+    );
+
+    if (!snapshot.empty) {
+
+      setContact(snapshot.docs[0].data());
+
+    }
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+};
+
+const fetchFooter = async () => {
+
+  try {
+
+    const snapshot = await getDocs(
+      query(
+        collection(db, "footer"),
+        limit(1)
+      )
+    );
+
+    if (!snapshot.empty) {
+
+      setFooter(snapshot.docs[0].data());
+
+    }
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+};
+
     const fetchProjects = async () => {
       try {
         const querySnapshot =
-          await getDocs(
-            collection(db, "portfolio")
-          )
+  await getDocs(
+    collection(db, "portfolioProjects")
+  )
 
         const projectsData =
           querySnapshot.docs.map(
@@ -139,7 +327,39 @@ export default function HomePage() {
       }
     }
 
-    fetchProjects()
+const loadData = async () => {
+  try {
+    await Promise.all([
+      fetchHero(),
+      fetchAbout(),
+      fetchExperience(),
+      fetchServices(),
+      fetchCategories(),
+      fetchProjects(),
+      fetchContact(),
+      fetchFooter(),
+    ]);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
+
+const init = async () => {
+
+  await loadData();
+
+  const sections =
+    document.querySelectorAll(".section-hidden");
+
+  sections.forEach((section) => {
+    observer.observe(section);
+  });
+
+};
+
+init();
 
     window.addEventListener(
       "scroll",
@@ -157,6 +377,31 @@ export default function HomePage() {
       )
     }
   }, [])
+
+  if (loading) {
+
+  return (
+    <div className="min-h-screen bg-black flex items-center justify-center">
+
+      <div className="text-white text-xl font-semibold">
+        Loading...
+      </div>
+
+    </div>
+  )
+
+}
+
+  if (!hero) return (
+    <div className="min-h-screen bg-black flex items-center justify-center">
+
+      <div className="text-white text-xl font-semibold">
+        Loading...
+      </div>
+
+    </div>
+
+  )
 
   return (
     <main
@@ -262,9 +507,10 @@ export default function HomePage() {
         }
 
         .service-card {
-          perspective: 1200px;
-          height: 220px;
-        }
+  perspective: 1200px;
+  min-height: 190px;
+  height: 100%;
+}
 
         .service-card-inner {
           position: relative;
@@ -288,7 +534,13 @@ export default function HomePage() {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 32px;
+          padding: 20px;
+          @media (min-width: 640px) {
+  .service-front,
+  .service-back {
+    padding: 28px;
+  }
+}
           background: #050505;
           overflow: hidden;
         }
@@ -343,9 +595,9 @@ export default function HomePage() {
       `}</style>
 
       <header className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-20 flex items-center justify-between">
           <a href="#top" className="text-2xl font-bold">
-            Gokul Grover
+            {hero?.name || "Gokul Grover"}
           </a>
 
           <nav className="hidden md:flex items-center gap-12 text-sm uppercase tracking-wide text-white/80">
@@ -357,33 +609,30 @@ export default function HomePage() {
           </nav>
 
           <a
-            href="#contact"
-            className="bg-white text-black px-8 py-3 rounded-full font-semibold"
-          >
+  href="#contact"
+  className="bg-white text-black px-5 sm:px-8 py-3 rounded-full font-semibold text-sm sm:text-base"
+>
             Let’s Talk
           </a>
         </div>
       </header>
 
-      <section className="min-h-screen flex items-center pt-32 px-6 lg:px-10">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center w-full">
+      <section className="min-h-screen flex items-center pt-28 sm:pt-32 lg:pt-36 pb-16 px-4 sm:px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
           <div>
             <p className="uppercase tracking-[0.3em] text-sm text-white/60 mb-6 fade-up">
-              Graphic Designer
+              {hero?.designation || "Graphic Designer"}
             </p>
 
-            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black leading-[0.95] tracking-tight mb-8">
-              <span className="typing-animation pb-4">
-                Building
-                <span className="block text-white/40">Visual</span>
-                Brands.
-              </span>
+            <h1 className="text-4xl sm:text-6xl lg:text-[7rem] xl:text-[8rem] font-black leading-[0.95] lg:leading-[0.82] tracking-[-0.04em] mb-6 lg:mb-8">
+ <span className="inline-block pb-4">
+   {hero?.heading || "Building Visual Brands."}
+</span>
             </h1>
 
-            <p className="text-lg text-white/70 max-w-xl leading-relaxed mb-10">
-              I create premium branding, social media creatives, product
-              visuals, advertising designs, and modern digital experiences that
-              help businesses stand out.
+            <p className="text-base sm:text-lg text-white/70 max-w-xl leading-relaxed mb-8 lg:mb-10">
+              {hero?.description ||
+"I create premium branding, social media creatives, product visuals, advertising designs, and modern digital experiences that help businesses stand out."}
             </p>
 
             <div className="flex gap-5 flex-wrap mb-16">
@@ -404,17 +653,17 @@ export default function HomePage() {
 
             <div className="grid grid-cols-3 gap-8 max-w-lg">
               <div>
-                <h3 className="text-4xl font-bold">{projects}+</h3>
+                <h3 className="text-4xl font-bold">{hero?.projects ?? projects}+</h3>
                 <p className="text-white/50 mt-2">Projects</p>
               </div>
 
               <div>
-                <h3 className="text-4xl font-bold">{clients}+</h3>
+                <h3 className="text-4xl font-bold">{hero?.clients ?? clients}+</h3>
                 <p className="text-white/50 mt-2">Clients</p>
               </div>
 
               <div>
-                <h3 className="text-4xl font-bold">{years}+</h3>
+                <h3 className="text-4xl font-bold">{hero?.years ?? years}+</h3>
                 <p className="text-white/50 mt-2">Years</p>
               </div>
             </div>
@@ -423,7 +672,7 @@ export default function HomePage() {
           <div className="relative flex items-center justify-center lg:justify-end fade-right lg:-mt-20">
             <div className="relative overflow-hidden rounded-[40px] border border-white/10 max-w-md">
               <img
-                src="/profile.jpeg"
+                src={hero?.profileImage || "/profile.jpeg"}
                 alt="Profile"
                 className="w-full h-full object-cover"
               />
@@ -467,28 +716,28 @@ export default function HomePage() {
             About Me
           </p>
 
-          <h2 className="text-4xl lg:text-6xl font-black leading-tight max-w-4xl mb-8">
-            I design modern visuals that make brands look premium and memorable.
+<h2 className="text-4xl lg:text-6xl font-black leading-tight max-w-4xl mb-8">
+            {about?.heading || "Creative Graphic Designer"}
           </h2>
 
-          <p className="text-lg text-white/60 leading-relaxed max-w-3xl">
-            I specialize in creating high-end branding, social media creatives,
-            packaging, product visuals, and digital experiences with a strong
-            focus on aesthetics, clarity, and brand impact.
+<p className="text-lg text-white/60 leading-relaxed max-w-3xl">
+            {about?.description ||
+    "Yahan tumhara current hardcoded description rahega."}
           </p>
+
         </div>
       </section>
       <section
-        id="experience"
-        className="py-20 px-6 lg:px-10 section-hidden"
-      >
+  id="experience"
+  className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10"
+>
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-20">
             <p className="uppercase tracking-[0.3em] text-sm text-white/50 mb-4">
               My Experience
             </p>
 
-            <h2 className="text-4xl lg:text-6xl font-black">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black">
               My Creative Journey
             </h2>
           </div>
@@ -497,47 +746,24 @@ export default function HomePage() {
             <div className="absolute left-1/2 top-0 h-full w-[2px] bg-white/10 -translate-x-1/2 hidden md:block overflow-hidden">
             <div className="timeline-progress absolute top-0 left-0 w-full bg-white h-0 transition-all duration-300"></div>
           </div>
-
-            {[
-              {
-                year: "2019",
-                company: "Design Square",
-                role: "Trainee",
-                duration: "2019 - 2020",
-                side: "left",
-              },
-              {
-                year: "2020",
-                company: "Pranshinuts",
-                role: "Junior Graphic Designer",
-                duration: "2020 - 2023",
-                side: "right",
-              },
-              {
-                year: "2023",
-                company: "TVS Automobile Solution Pvt. Ltd.",
-                role: "Graphic Designer",
-                duration: "2023 - Present",
-                side: "left",
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="relative grid md:grid-cols-2 items-center mb-16"
+            {experience.map((item, index) => (
+                <div
+                key={item.id}
+                className="relative grid md:grid-cols-2 items-center mb-10 lg:mb-16"
               >
                 <div
                   className={`${
-                    item.side === "right"
+                    index % 2 !== 0
                       ? "md:col-start-2 md:pl-12"
                       : "md:pr-12"
                   }`}
                 >
-                  <div className="bg-white/[0.02] border border-white/10 rounded-[24px] p-7 hover:border-white/20 transition-all duration-500">
+                  <div className="bg-white/[0.02] border border-white/10 rounded-2xl lg:rounded-[24px] p-5 sm:p-6 lg:p-7 hover:border-white/20 transition-all duration-500">
                     <span className="text-[11px] uppercase tracking-[0.25em] text-white/35 block mb-3">
                       {item.duration}
                     </span>
 
-                    <h3 className="text-2xl lg:text-3xl font-black leading-tight mb-2">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-black leading-tight mb-2">
                       {item.company}
                     </h3>
 
@@ -566,44 +792,15 @@ export default function HomePage() {
         </div>
       </section>
       <section
-        id="services"
-        className="py-28 px-6 lg:px-10 section-hidden"
-      >
+  id="services"
+  className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10"
+>
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-black mb-16">Services</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-10 lg:mb-16">Services</h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Brand Identity",
-                desc: "Premium branding systems that create a strong and memorable visual identity.",
-              },
-              {
-                title: "Social Media Design",
-                desc: "Modern creatives and ad visuals designed for engagement and brand growth.",
-              },
-              {
-                title: "Packaging Design",
-                desc: "Clean and premium packaging concepts that improve shelf impact.",
-              },
-              {
-                title: "Advertising Creatives",
-                desc: "High-converting ad creatives for campaigns, promotions, and launches.",
-              },
-              {
-                title: "Product Retouching",
-                desc: "Professional product editing and enhancement for premium presentation.",
-              },
-              {
-                title: "Retail Branding",
-                desc: "Shop branding, storefront visuals, signage systems, and in-store branding design.",
-              },
-              {
-                title: "Video Editing",
-                desc: "Professional video edits, motion cuts, reels, and cinematic visual storytelling.",
-              },
-            ].map((service) => (
-              <div key={service.title} className="service-card">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
+            {services.map((service) => (
+              <div key={service.id} className="service-card">
                 <div className="service-card-inner">
                   <div className="service-front">
                     <h3 className="text-2xl font-bold text-center">
@@ -613,7 +810,7 @@ export default function HomePage() {
 
                   <div className="service-back">
                     <p className="text-white/70 text-center leading-relaxed text-lg">
-                      {service.desc}
+                      {service.description}
                     </p>
                   </div>
                 </div>
@@ -627,7 +824,7 @@ export default function HomePage() {
 
 <section
   id="portfolio"
-  className="py-32 px-6 lg:px-10"
+  className="py-20 lg:py-32 px-4 sm:px-6 lg:px-10"
 >
   <div className="max-w-7xl mx-auto">
 
@@ -640,12 +837,12 @@ export default function HomePage() {
           Selected Work
         </p>
 
-        <h2 className="text-5xl lg:text-7xl font-black leading-tight">
+        <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black leading-tight">
           Featured Portfolio
         </h2>
       </div>
 
-      <p className="text-white/50 max-w-md leading-relaxed">
+      <p className="text-sm sm:text-base text-white/50 max-w-md leading-relaxed">
         Branding, advertising creatives, retail branding,
         packaging design, social media campaigns, and
         visual systems crafted for modern brands.
@@ -655,504 +852,67 @@ export default function HomePage() {
 
     {/* PORTFOLIO GRID */}
 
-    <div className="grid md:grid-cols-2 gap-x-10 gap-y-20">
-
-      {/* RETAIL BRANDING */}
-
-      {portfolioProjects
-        .filter(
-          (project) =>
-            project.category ===
-            "retail-branding"
-        )
-        .slice(0, 1)
-        .map((project) => (
-
-          <div key={project.id}>
-
-            <h3 className="text-3xl lg:text-5xl font-black mb-10">
-              Retail Branding
-            </h3>
-
-            <div
-              onClick={() =>
-                setSelectedProject(project)
-              }
-              className="group relative overflow-hidden rounded-[36px]
-              border border-white/10 bg-white/[0.02]
-              cursor-pointer transition-all duration-500
-              hover:border-white/20 hover:-translate-y-2"
-            >
+    <div className="grid md:grid-cols-2 gap-x-6 lg:gap-x-10 gap-y-12 lg:gap-y-20">
 
-              <div className="overflow-hidden">
-                <img
-                  src={project.coverImage}
-                  alt={project.title}
-                  className="w-full h-[520px] object-cover
-                  transition-transform duration-700
-                  group-hover:scale-105"
-                />
-              </div>
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-
-              <div className="absolute bottom-0 left-0 p-8 lg:p-10">
-
-                <span className="text-[10px] uppercase tracking-[0.3em]
-                text-white/45 block mb-5">
-                  CATEGORY
-                </span>
-
-                <h3 className="text-4xl lg:text-5xl font-black leading-tight mb-5">
-                  {project.title}
-                </h3>
-
-                <p className="text-white/65 leading-relaxed max-w-lg text-lg">
-                  {project.description}
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        ))}
-
-      {/* PACKAGING DESIGN */}
-
-      {portfolioProjects
-        .filter(
-          (project) =>
-            project.category ===
-            "packaging-design"
-        )
-        .slice(0, 1)
-        .map((project) => (
-
-          <div key={project.id}>
-
-            <h3 className="text-3xl lg:text-5xl font-black mb-10">
-              Packaging Design
-            </h3>
-
-            <div
-              onClick={() =>
-                setSelectedProject(project)
-              }
-              className="group relative overflow-hidden rounded-[36px]
-              border border-white/10 bg-white/[0.02]
-              cursor-pointer transition-all duration-500
-              hover:border-white/20 hover:-translate-y-2"
-            >
-
-              <div className="overflow-hidden">
-                <img
-                  src={project.coverImage}
-                  alt={project.title}
-                  className="w-full h-[520px] object-cover
-                  transition-transform duration-700
-                  group-hover:scale-105"
-                />
-              </div>
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+      {categories.map((category) => {
 
-              <div className="absolute bottom-0 left-0 p-8 lg:p-10">
+  const project = portfolioProjects.find(
+    (item) => item.category === category.slug
+  );
 
-                <span className="text-[10px] uppercase tracking-[0.3em]
-                text-white/45 block mb-5">
-                  CATEGORY
-                </span>
+  if (!project) return null;
 
-                <h3 className="text-4xl lg:text-5xl font-black leading-tight mb-5">
-                  {project.title}
-                </h3>
+  return (
 
-                <p className="text-white/65 leading-relaxed max-w-lg text-lg">
-                  {project.description}
-                </p>
+    <div key={category.id}>
 
-              </div>
+      <h3 className="text-2xl sm:text-3xl lg:text-5xl font-black mb-6 lg:mb-10">
+        {category.name}
+      </h3>
 
-            </div>
-
-          </div>
-
-        ))}
-
-      {/* SOCIAL MEDIA CREATIVE */}
+      <div
+        onClick={() => setSelectedProject(project)}
+        className="group relative overflow-hidden rounded-[36px]
+        border border-white/10 bg-white/[0.02]
+        cursor-pointer transition-all duration-500
+        hover:border-white/20 hover:-translate-y-2"
+      >
 
-      {portfolioProjects
-        .filter(
-          (project) =>
-            project.category ===
-            "social-media-creative"
-        )
-        .slice(0, 1)
-        .map((project) => (
+        <div className="overflow-hidden">
 
-          <div key={project.id}>
+          <img
+            src={project.coverImage}
+            alt={project.title}
+            className="w-full h-[280px] sm:h-[380px] lg:h-[520px] object-cover transition-transform duration-700 group-hover:scale-105"
+          />
 
-            <h3 className="text-3xl lg:text-5xl font-black mb-10">
-              Social Media Creative
-            </h3>
+        </div>
 
-            <div
-              onClick={() =>
-                setSelectedProject(project)
-              }
-              className="group relative overflow-hidden rounded-[36px]
-              border border-white/10 bg-white/[0.02]
-              cursor-pointer transition-all duration-500
-              hover:border-white/20 hover:-translate-y-2"
-            >
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
 
-              <div className="overflow-hidden">
-                <img
-                  src={project.coverImage}
-                  alt={project.title}
-                  className="w-full h-[520px] object-cover
-                  transition-transform duration-700
-                  group-hover:scale-105"
-                />
-              </div>
+        <div className="absolute bottom-0 left-0 p-8 lg:p-10">
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-white/45 block mb-5">
+            CATEGORY
+          </span>
 
-              <div className="absolute bottom-0 left-0 p-8 lg:p-10">
+          <h3 className="text-2xl sm:text-3xl lg:text-5xl font-black leading-tight mb-4 lg:mb-5">
+            {project.title}
+          </h3>
 
-                <span className="text-[10px] uppercase tracking-[0.3em]
-                text-white/45 block mb-5">
-                  CATEGORY
-                </span>
+          <p className="text-white/65 leading-relaxed max-w-lg text-sm sm:text-base lg:text-lg">
+            {project.description}
+          </p>
 
-                <h3 className="text-4xl lg:text-5xl font-black leading-tight mb-5">
-                  {project.title}
-                </h3>
+        </div>
 
-                <p className="text-white/65 leading-relaxed max-w-lg text-lg">
-                  {project.description}
-                </p>
+      </div>
 
-              </div>
-
-            </div>
-
-          </div>
-
-        ))}
-
-      {/* POSTER DESIGN */}
-
-      {portfolioProjects
-        .filter(
-          (project) =>
-            project.category ===
-            "poster-design"
-        )
-        .slice(0, 1)
-        .map((project) => (
-
-          <div key={project.id}>
+    </div>
 
-            <h3 className="text-3xl lg:text-5xl font-black mb-10">
-              Poster Design
-            </h3>
+  );
 
-            <div
-              onClick={() =>
-                setSelectedProject(project)
-              }
-              className="group relative overflow-hidden rounded-[36px]
-              border border-white/10 bg-white/[0.02]
-              cursor-pointer transition-all duration-500
-              hover:border-white/20 hover:-translate-y-2"
-            >
-
-              <div className="overflow-hidden">
-                <img
-                  src={project.coverImage}
-                  alt={project.title}
-                  className="w-full h-[520px] object-cover
-                  transition-transform duration-700
-                  group-hover:scale-105"
-                />
-              </div>
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-
-              <div className="absolute bottom-0 left-0 p-8 lg:p-10">
-
-                <span className="text-[10px] uppercase tracking-[0.3em]
-                text-white/45 block mb-5">
-                  CATEGORY
-                </span>
-
-                <h3 className="text-4xl lg:text-5xl font-black leading-tight mb-5">
-                  {project.title}
-                </h3>
-
-                <p className="text-white/65 leading-relaxed max-w-lg text-lg">
-                  {project.description}
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        ))}
-
-      {/* BROCHURE DESIGN */}
-
-      {portfolioProjects
-        .filter(
-          (project) =>
-            project.category ===
-            "brochure-design"
-        )
-        .slice(0, 1)
-        .map((project) => (
-
-          <div key={project.id}>
-
-            <h3 className="text-3xl lg:text-5xl font-black mb-10">
-              Brochure Design
-            </h3>
-
-            <div
-              onClick={() =>
-                setSelectedProject(project)
-              }
-              className="group relative overflow-hidden rounded-[36px]
-              border border-white/10 bg-white/[0.02]
-              cursor-pointer transition-all duration-500
-              hover:border-white/20 hover:-translate-y-2"
-            >
-
-              <div className="overflow-hidden">
-                <img
-                  src={project.coverImage}
-                  alt={project.title}
-                  className="w-full h-[520px] object-cover
-                  transition-transform duration-700
-                  group-hover:scale-105"
-                />
-              </div>
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-
-              <div className="absolute bottom-0 left-0 p-8 lg:p-10">
-
-                <span className="text-[10px] uppercase tracking-[0.3em]
-                text-white/45 block mb-5">
-                  CATEGORY
-                </span>
-
-                <h3 className="text-4xl lg:text-5xl font-black leading-tight mb-5">
-                  {project.title}
-                </h3>
-
-                <p className="text-white/65 leading-relaxed max-w-lg text-lg">
-                  {project.description}
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        ))}
-
-      {/* LOGO DESIGN */}
-
-      {portfolioProjects
-        .filter(
-          (project) =>
-            project.category ===
-            "logo-design"
-        )
-        .slice(0, 1)
-        .map((project) => (
-
-          <div key={project.id}>
-
-            <h3 className="text-3xl lg:text-5xl font-black mb-10">
-              Logo Design
-            </h3>
-
-            <div
-              onClick={() =>
-                setSelectedProject(project)
-              }
-              className="group relative overflow-hidden rounded-[36px]
-              border border-white/10 bg-white/[0.02]
-              cursor-pointer transition-all duration-500
-              hover:border-white/20 hover:-translate-y-2"
-            >
-
-              <div className="overflow-hidden">
-                <img
-                  src={project.coverImage}
-                  alt={project.title}
-                  className="w-full h-[520px] object-cover
-                  transition-transform duration-700
-                  group-hover:scale-105"
-                />
-              </div>
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-
-              <div className="absolute bottom-0 left-0 p-8 lg:p-10">
-
-                <span className="text-[10px] uppercase tracking-[0.3em]
-                text-white/45 block mb-5">
-                  CATEGORY
-                </span>
-
-                <h3 className="text-4xl lg:text-5xl font-black leading-tight mb-5">
-                  {project.title}
-                </h3>
-
-                <p className="text-white/65 leading-relaxed max-w-lg text-lg">
-                  {project.description}
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        ))}
-
-      {/* E-COMMERCE CREATIVE */}
-
-      {portfolioProjects
-        .filter(
-          (project) =>
-            project.category ===
-            "ecommerce-creative"
-        )
-        .slice(0, 1)
-        .map((project) => (
-
-          <div key={project.id}>
-
-            <h3 className="text-3xl lg:text-5xl font-black mb-10">
-              E-Commerce Creative
-            </h3>
-
-            <div
-              onClick={() =>
-                setSelectedProject(project)
-              }
-              className="group relative overflow-hidden rounded-[36px]
-              border border-white/10 bg-white/[0.02]
-              cursor-pointer transition-all duration-500
-              hover:border-white/20 hover:-translate-y-2"
-            >
-
-              <div className="overflow-hidden">
-                <img
-                  src={project.coverImage}
-                  alt={project.title}
-                  className="w-full h-[520px] object-cover
-                  transition-transform duration-700
-                  group-hover:scale-105"
-                />
-              </div>
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-
-              <div className="absolute bottom-0 left-0 p-8 lg:p-10">
-
-                <span className="text-[10px] uppercase tracking-[0.3em]
-                text-white/45 block mb-5">
-                  CATEGORY
-                </span>
-
-                <h3 className="text-4xl lg:text-5xl font-black leading-tight mb-5">
-                  {project.title}
-                </h3>
-
-                <p className="text-white/65 leading-relaxed max-w-lg text-lg">
-                  {project.description}
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        ))}
-
-      {/* VIDEO EDITING */}
-
-      {portfolioProjects
-        .filter(
-          (project) =>
-            project.category ===
-            "video-editing"
-        )
-        .slice(0, 1)
-        .map((project) => (
-
-          <div key={project.id}>
-
-            <h3 className="text-3xl lg:text-5xl font-black mb-10">
-              Video Editing
-            </h3>
-
-            <div
-              onClick={() =>
-                setSelectedProject(project)
-              }
-              className="group relative overflow-hidden rounded-[36px]
-              border border-white/10 bg-white/[0.02]
-              cursor-pointer transition-all duration-500
-              hover:border-white/20 hover:-translate-y-2"
-            >
-
-              <div className="overflow-hidden">
-                <img
-                  src={project.coverImage}
-                  alt={project.title}
-                  className="w-full h-[520px] object-cover
-                  transition-transform duration-700
-                  group-hover:scale-105"
-                />
-              </div>
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-
-              <div className="absolute bottom-0 left-0 p-8 lg:p-10">
-
-                <span className="text-[10px] uppercase tracking-[0.3em]
-                text-white/45 block mb-5">
-                  CATEGORY
-                </span>
-
-                <h3 className="text-4xl lg:text-5xl font-black leading-tight mb-5">
-                  {project.title}
-                </h3>
-
-                <p className="text-white/65 leading-relaxed max-w-lg text-lg">
-                  {project.description}
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        ))}
-
+})}
     </div>
 
   </div>
@@ -1169,7 +929,7 @@ export default function HomePage() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex items-center justify-between">
 
         <div>
-          <h2 className="text-3xl lg:text-5xl font-black mb-2">
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black mb-2">
             {selectedProject.title}
           </h2>
 
@@ -1192,7 +952,7 @@ export default function HomePage() {
       </div>
     </div>
 
-    <div className="max-w-7xl mx-auto px-6 lg:px-10 py-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-8 lg:py-16">
 
       {selectedProject.category ===
         "video-editing" ? (
@@ -1277,7 +1037,7 @@ export default function HomePage() {
       onClick={() =>
         setFullscreenImage(false)
       }
-      className="absolute top-6 right-6 w-14 h-14 rounded-full
+      className="absolute top-4 right-4 lg:top-6 lg:right-6 w-11 h-11 lg:w-14 lg:h-14 rounded-full
       border border-white/10 text-3xl
       hover:bg-white hover:text-black
       transition-all duration-300 z-50"
@@ -1297,8 +1057,8 @@ export default function HomePage() {
       : prev - 1
   )
 }}
-      className="absolute left-6 top-1/2 -translate-y-1/2
-      w-14 h-14 rounded-full border border-white/10
+      className="absolute left-3 lg:left-6 top-1/2 -translate-y-1/2
+      w-11 h-11 lg:w-14 lg:h-14 rounded-full border border-white/10
       text-3xl hover:bg-white hover:text-black
       transition-all duration-300 z-50"
     >
@@ -1312,7 +1072,7 @@ export default function HomePage() {
   selectedProject.images[currentImageIndex]
 }
       alt=""
-      className={`max-w-full max-h-full object-contain rounded-[20px]
+      className={`max-w-full max-h-[85vh] lg:max-h-full object-contain rounded-2xl lg:rounded-[20px]
 ${
   imageDirection === "right"
     ? "image-slide-right"
@@ -1333,8 +1093,8 @@ ${
       : prev + 1
   )
 }}
-      className="absolute right-6 top-1/2 -translate-y-1/2
-      w-14 h-14 rounded-full border border-white/10
+      className="absolute right-3 lg:right-6 top-1/2 -translate-y-1/2
+      w-11 h-11 lg:w-14 lg:h-14 rounded-full border border-white/10
       text-3xl hover:bg-white hover:text-black
       transition-all duration-300 z-50"
     >
@@ -1345,66 +1105,66 @@ ${
 
 )}
       <section
-        id="contact"
-        className="py-28 px-6 lg:px-10"
-      >
+  id="contact"
+  className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10"
+>
         <div className="max-w-5xl mx-auto text-center">
           <p className="uppercase tracking-[0.3em] text-sm text-white/50 mb-6">
             Contact
           </p>
 
-          <h2 className="text-5xl lg:text-7xl font-black mb-8">
+          <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black mb-6 lg:mb-8">
             Let’s Build Something Great.
           </h2>
 
-          <p className="text-white/60 text-lg mb-12">
+          <p className="text-white/60 text-base sm:text-lg mb-8 lg:mb-12">
             Available for freelance projects, branding work, and creative
             collaborations.
           </p>
 
           <div className="flex justify-center gap-5 flex-wrap">
             <a
-              href="https://wa.me/918699966924"
+              href={contact?.whatsapp || "https://wa.me/918107384993"}
               target="_blank"
-              className="bg-white text-black px-10 py-5 rounded-full font-semibold"
+              className="bg-white text-black px-6 sm:px-10 py-4 sm:py-5 rounded-full font-semibold text-sm sm:text-base"
             >
               WhatsApp
             </a>
 
             <a
-              href="mailto:gokulgrover123@gmail.com"
-              className="border border-white/20 px-10 py-5 rounded-full font-semibold"
+              href={`mailto:${contact?.email || "gokulgrover123@gmail.com"}`}
+              className="border border-white/20 px-6 sm:px-10 py-4 sm:py-5 rounded-full font-semibold text-sm sm:text-base"
             >
               Let’s Talk
             </a>
           </div>
         </div>
       </section>
-      <footer className="border-t border-white/10 py-12 px-6 lg:px-10">
+      <footer className="border-t border-white/10 py-10 lg:py-12 px-4 sm:px-6 lg:px-10">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
         
         <div>
-          <h3 className="text-3xl font-black mb-3">
-            Gokul Grover
+          <h3 className="text-2xl sm:text-3xl font-black mb-3">
+            {footer?.name || "Gokul Grover"}
           </h3>
 
           <p className="text-white/50 max-w-md leading-relaxed">
-            Graphic Designer focused on branding, social media creatives,
-            advertising visuals, and premium digital experiences.
+            {footer?.description ||
+    "Graphic Designer focused on branding, social media creatives, advertising visuals, and premium digital experiences."}
           </p>
         </div>
 
         <div className="flex items-center gap-5 flex-wrap">
           <a
-            href="https://instagram.com/yourusername"
+            href={footer?.instagram || "#"}
             target="_blank"
-            className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300"
+            className="w-11 h-11 sm:w-14 sm:h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300"
           >
             IG
           </a>
 
           <a
-            href="https://behance.net/yourusername"
+            href={footer?.behance || "#"}
             target="_blank"
             className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300"
           >
@@ -1412,25 +1172,17 @@ ${
           </a>
 
           <a
-            href="https://linkedin.com/in/yourusername"
+            href={footer?.linkedin || "#"}
             target="_blank"
             className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300"
           >
             IN
           </a>
-
-          <a
-            href="https://youtube.com/@yourchannel"
-            target="_blank"
-            className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300"
-          >
-            YT
-          </a>
         </div>
       </div>
 
-      <div className="border-t border-white/10 mt-10 pt-6 text-center text-white/40 text-sm">
-        © 2026 Gokul Grover. All Rights Reserved.
+      <div className="border-t border-white/10 mt-8 lg:mt-10 pt-5 lg:pt-6 text-center text-white/40 text-xs sm:text-sm">
+        © 2026 {footer?.name || "Gokul Grover"}. All Rights Reserved.
       </div>
     </footer>
     </main>
