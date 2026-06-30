@@ -709,7 +709,7 @@ init();
 
       <section
         id="about"
-        className="py-28 px-6 lg:px-10 section-hidden"
+        className="py-28 px-6 lg:px-10"
       >
         <div className="max-w-6xl mx-auto">
           <p className="uppercase tracking-[0.3em] text-sm text-white/50 mb-6">
