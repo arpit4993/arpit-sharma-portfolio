@@ -600,20 +600,35 @@ init();
             {hero?.name || "Gokul Grover"}
           </a>
 
-          <nav className="hidden md:flex items-center gap-12 text-sm uppercase tracking-wide text-white/80">
-            <a href="#about">About</a>
-            <a href="#experience">Experience</a>
-            <a href="#services">Services</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#contact">Contact</a>
-          </nav>
+          <nav className="hidden md:flex items-center gap-10 text-sm uppercase tracking-wide text-white/80">  
 
+  <a href="#about">About</a>
+
+  <a href="#experience">Experience</a>
+
+  <a href="#services">Services</a>
+
+  <a href="#portfolio">Portfolio</a>
+
+  <a href="#contact">Contact</a>
+
+  <a
+    href="/ai"
+    className="bg-[#F2D14B] text-black px-5 py-2 rounded-md font-black text-xs tracking-[0.18em] uppercase hover:bg-[#ffe45a] transition-all duration-300"
+  >
+    AI SECTION
+  </a>
+
+</nav>
+
+        <div className="flex items-center gap-6">
           <a
   href="#contact"
   className="bg-white text-black px-5 sm:px-8 py-3 rounded-full font-semibold text-sm sm:text-base"
 >
             Let’s Talk
           </a>
+          </div>
         </div>
       </header>
 
