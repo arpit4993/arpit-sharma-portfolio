@@ -1127,9 +1127,9 @@ margin-top:calc(clamp(110px,34vw,170px) / -2);
 
     flex-direction:column;
 
-    padding:18px;
+    padding:clamp(10px,3vw,18px);
 
-    gap:10px;
+    gap:clamp(8px,2vw,10px);
 
 }
 
@@ -1140,14 +1140,13 @@ margin-top:calc(clamp(110px,34vw,170px) / -2);
     display:grid;
 
     grid-template-columns:
-
-42px
-46px
-1fr;
+    clamp(30px,8vw,42px)
+    clamp(34px,9vw,46px)
+    1fr;
 
     align-items:center;
 
-    height:58px;
+    min-height:58px;
 
     border-radius:14px;
 
@@ -1165,7 +1164,7 @@ margin-top:calc(clamp(110px,34vw,170px) / -2);
 
     text-align:center;
 
-    font-size:12px;
+    font-size:clamp(10px,2.8vw,12px);
 
     color:rgba(255,255,255,.45);
 
@@ -1177,9 +1176,8 @@ margin-top:calc(clamp(110px,34vw,170px) / -2);
 
 .workflow-icon{
 
-    width:30px;
-
-    height:30px;
+    width:clamp(24px,6vw,30px);
+height:clamp(24px,6vw,30px);
 
     display:flex;
 
@@ -1201,17 +1199,19 @@ margin-top:calc(clamp(110px,34vw,170px) / -2);
 
 .workflow-title{
 
-    font-size:12px;
+    font-size:clamp(10px,2.8vw,12px);
 
-    letter-spacing:.18em;
+    letter-spacing:clamp(.08em,.3vw,.18em);
 
     font-weight:600;
 
     color:#ececec;
-    
+
     white-space:nowrap;
 
-    overflow:visible;
+    overflow:hidden;
+
+    text-overflow:ellipsis;
 }
 
   /* =====================================================
@@ -1242,7 +1242,7 @@ margin-top:calc(clamp(110px,34vw,170px) / -2);
 
 .workflow-item:hover{
 
-    transform:translateX(8px);
+    transform:translateX(clamp(3px,1vw,8px));
 
     border-color:rgba(160,110,255,.35);
 
@@ -1367,12 +1367,11 @@ margin-top:calc(clamp(110px,34vw,170px) / -2);
 .workflow-panel{
 
     width:100%;
+    max-width:340px;
 
-    width:min(100%,340px);
+    padding:clamp(12px,3vw,16px);
 
-    padding:16px;
-
-    border-radius:22px;
+    border-radius:clamp(16px,3vw,22px);
 
     border:1px solid rgba(255,255,255,.08);
 
