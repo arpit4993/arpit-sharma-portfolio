@@ -598,7 +598,9 @@ init();
       `}</style>
 
       <header className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-20 flex items-center">
+
+          <div className="flex items-center justify-between w-full md:w-auto">
           <a href="#top" className="text-2xl font-bold">
             {hero?.name || "Gokul Grover"}
           </a>
@@ -609,8 +611,9 @@ init();
 >
   <Menu size={30} />
 </button>
+</div>
 
-          <nav className="hidden md:flex items-center gap-10 text-sm uppercase tracking-wide text-white/80">  
+          <nav className="hidden md:flex items-center gap-10 ml-auto text-sm uppercase tracking-wide text-white/80">
 
   <a href="#about">About</a>
 
@@ -631,7 +634,7 @@ init();
 
 </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-4 ml-10">
           <a
   href="#contact"
   className="hidden md:flex bg-white text-black px-5 sm:px-8 py-3 rounded-full font-semibold text-sm sm:text-base"
