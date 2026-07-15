@@ -634,7 +634,7 @@ init();
         <div className="flex items-center gap-4">
           <a
   href="#contact"
-  className="bg-white text-black px-5 sm:px-8 py-3 rounded-full font-semibold text-sm sm:text-base"
+  className="hidden md:flex bg-white text-black px-5 sm:px-8 py-3 rounded-full font-semibold text-sm sm:text-base"
 >
             Let’s Talk
           </a>
@@ -662,7 +662,7 @@ onClick={() => setMobileMenu(false)}
 
 </div>
 
-<nav className="flex-1 flex flex-col justify-center items-center gap-8 text-3xl font-bold">
+<nav className="flex-1 flex flex-col justify-center items-center gap-7 text-[30px] font-black tracking-wide">
 
 <a
 href="#about"
@@ -707,6 +707,18 @@ className="text-yellow-400"
 AI Integration
 </a>
 
+<div className="w-full px-8 pt-6">
+
+  <a
+    href="#contact"
+    onClick={() => setMobileMenu(false)}
+    className="w-full flex justify-center items-center bg-white text-black rounded-full py-4 font-bold text-lg"
+  >
+    Let’s Talk
+  </a>
+
+</div>
+
 </nav>
 
 </div>
@@ -741,7 +753,7 @@ AI Integration
 
               <a
                 href="#contact"
-                className="hidden sm:flex border border-white/20 px-10 py-5 rounded-full font-semibold"
+                className="sm:flex border border-white/20 px-10 py-5 rounded-full font-semibold"
               >
                 Hire Me
               </a>
