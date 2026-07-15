@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react"
 
+import { Menu, X } from "lucide-react";
+
 import {
   collection,
   getDocs,
@@ -24,6 +26,7 @@ export default function HomePage() {
   const [contact, setContact] = useState(null)
   const [footer, setFooter] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [mobileMenu, setMobileMenu] = useState(false);
 
   const [
     portfolioProjects,
@@ -600,6 +603,13 @@ init();
             {hero?.name || "Gokul Grover"}
           </a>
 
+          <button
+  onClick={() => setMobileMenu(true)}
+  className="md:hidden text-white"
+>
+  <Menu size={30} />
+</button>
+
           <nav className="hidden md:flex items-center gap-10 text-sm uppercase tracking-wide text-white/80">  
 
   <a href="#about">About</a>
@@ -621,7 +631,7 @@ init();
 
 </nav>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
           <a
   href="#contact"
   className="bg-white text-black px-5 sm:px-8 py-3 rounded-full font-semibold text-sm sm:text-base"
@@ -631,6 +641,77 @@ init();
           </div>
         </div>
       </header>
+
+      {mobileMenu && (
+
+<div className="fixed inset-0 bg-black z-[999] flex flex-col">
+
+<div className="flex justify-between items-center h-20 px-6 border-b border-white/10">
+
+<h2 className="text-2xl font-bold">
+{hero?.name}
+</h2>
+
+<button
+onClick={() => setMobileMenu(false)}
+>
+
+<X size={34} />
+
+</button>
+
+</div>
+
+<nav className="flex-1 flex flex-col justify-center items-center gap-8 text-3xl font-bold">
+
+<a
+href="#about"
+onClick={()=>setMobileMenu(false)}
+>
+About
+</a>
+
+<a
+href="#experience"
+onClick={()=>setMobileMenu(false)}
+>
+Experience
+</a>
+
+<a
+href="#services"
+onClick={()=>setMobileMenu(false)}
+>
+Services
+</a>
+
+<a
+href="#portfolio"
+onClick={()=>setMobileMenu(false)}
+>
+Portfolio
+</a>
+
+<a
+href="#contact"
+onClick={()=>setMobileMenu(false)}
+>
+Contact
+</a>
+
+<a
+href="/ai"
+onClick={()=>setMobileMenu(false)}
+className="text-yellow-400"
+>
+AI Integration
+</a>
+
+</nav>
+
+</div>
+
+)}
 
       <section className="min-h-screen flex items-center pt-28 sm:pt-32 lg:pt-36 pb-16 px-4 sm:px-6 lg:px-10">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
@@ -660,7 +741,7 @@ init();
 
               <a
                 href="#contact"
-                className="border border-white/20 px-10 py-5 rounded-full font-semibold"
+                className="hidden sm:flex border border-white/20 px-10 py-5 rounded-full font-semibold"
               >
                 Hire Me
               </a>
