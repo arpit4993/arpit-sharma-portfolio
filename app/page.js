@@ -616,7 +616,7 @@ init();
     href="/ai"
     className="bg-[#F2D14B] text-black px-5 py-2 rounded-md font-black text-xs tracking-[0.18em] uppercase hover:bg-[#ffe45a] transition-all duration-300"
   >
-    AI SECTION
+    AI INTEGRATION
   </a>
 
 </nav>
