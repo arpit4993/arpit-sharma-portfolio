@@ -170,12 +170,12 @@ return () => {};
 </nav>
 
         <div className="hidden md:flex items-center gap-4 ml-10">
-          <a
+          <Link
   href="/#contact"
   className="hidden sm:flex bg-white text-black px-5 sm:px-8 py-3 rounded-full font-semibold text-sm sm:text-base"
 >
             Let’s Talk
-          </a>
+          </Link>
           </div>
         </div>
       </header>

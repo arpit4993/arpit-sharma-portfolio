@@ -23,7 +23,7 @@ export default function Section02() {
 
     position:relative;
 
-    min-height:340px;
+    min-height:clamp(300px,60vw,340px);
     height:100%;
 
     border-radius:clamp(18px,2vw,24px);
@@ -74,7 +74,7 @@ export default function Section02() {
 
     margin-top:0px;
 
-    font-size:clamp(52px,10vw,78px);
+    font-size:clamp(42px,12vw,78px);
 
     line-height:1;
 
@@ -118,11 +118,13 @@ export default function Section02() {
 
     font-size:clamp(14px,2vw,15px);
 
-    line-height:1.8;
+    line-height:1.65;
 
     color:#9ca3af;
 
     max-width:100%;
+
+    overflow-wrap:anywhere;
 
 }
 
@@ -695,17 +697,27 @@ lg:mb-10
         </div>
 
         <h2
-          className="
-            text-white
-            uppercase
-            font-black
-            leading-[0.9]
-            text-[clamp(34px,7vw,50px)]
-tracking-[-0.04em]
-          "
-        >
-          I DON'T USE AI TO CREATE. I USE AI TO EXPLORE MORE.
-        </h2>
+  className="
+    text-white
+    uppercase
+    font-black
+
+    text-[clamp(24px,9vw,50px)]
+
+    leading-[0.95]
+
+    tracking-[-0.03em]
+
+    break-words
+
+    max-w-full
+  "
+>
+  I DON'T USE AI TO CREATE.
+  <br className="hidden lg:block" />
+  {" "}
+  I USE AI TO EXPLORE MORE.
+</h2>
 
       </div>
 
