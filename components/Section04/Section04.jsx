@@ -3572,15 +3572,7 @@ lg:mb-10
 
                 <h2 className="section45-heading">
 
-                    INSIDE
-
-                    <br/>
-
-                    MY AI
-
-                    <br/>
-
-                    STACK.
+                    INSIDE MY AI STACK.
 
                 </h2>
 
