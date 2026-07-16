@@ -1533,7 +1533,7 @@ box-shadow:
 
     top:48px;
 
-    right:0px;
+    right:-11px;
 
 }
 
@@ -3142,7 +3142,6 @@ box-shadow:
     transform:none;
 
     margin-inline:auto;
-    
 }
 
 .orbit-ring-outer{
@@ -3220,27 +3219,36 @@ box-shadow:
 
 .label-right{
 
-    right:-22px;
+    right:-23.5px;
 
 }
 
 .label-left{
 
-    left:-22px;
+    left:-28px;
 
 }
 
-.label-top-right,
+.label-top-right{
+
+    right:-5px;
+
+}
 .label-bottom-right{
 
     right:8px;
 
 }
 
-.label-top-left,
+.label-top-left{
+
+    top:43px;
+    left:-25px;
+
+}
 .label-bottom-left{
 
-    left:8px;
+    left:6px;
 
 }
 
