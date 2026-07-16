@@ -58,7 +58,7 @@ export default function Section06() {
 
     width:100%;
 
-    padding:110px 0 0;
+    padding:clamp(70px,8vw,110px) 0 0;
 
 }
 
@@ -70,7 +70,7 @@ export default function Section06() {
 
     margin:0 auto;
 
-    padding:0 48px;
+    padding:0 clamp(16px,4vw,48px);
 
 }
 
@@ -118,9 +118,9 @@ export default function Section06() {
 
 .section06-heading{
 
-    margin:0 0 44px;
+    margin:0 0 clamp(28px,5vw,44px);
 
-    font-size:34px;
+    font-size:clamp(30px,6vw,34px);
 
     font-weight:700;
 
@@ -140,7 +140,7 @@ export default function Section06() {
 
     grid-template-columns:repeat(4,minmax(0,1fr));
 
-    gap:22px;
+    gap:clamp(16px,2vw,22px);
 
 }
 
@@ -841,6 +841,33 @@ export default function Section06() {
     border-radius:50%;
 
 }
+
+/* =====================================================
+      SECTION 06 RESPONSIVE PART 1
+===================================================== */
+
+@media (max-width:1023px){
+
+.section06-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.section06-top{
+
+    gap:14px;
+
+}
+
+.section06-heading{
+
+    text-align:left;
+
+}
+
+}
+
       `}</style>
 
 {/* =====================================================
