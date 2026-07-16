@@ -730,6 +730,7 @@ export default function Section02() {
 <section className="relative border-b border-white/10 bg-black">
 
   <div className="
+w-full
 max-w-[1600px]
 mx-auto
 
@@ -747,6 +748,8 @@ lg:grid-cols-12
 gap-10
 lg:gap-12
 items-start
+justify-items-center
+lg:justify-items-stretch
 ">
 
       {/* ================= LEFT ================= */}
@@ -769,6 +772,8 @@ lg:text-left
     <div className="
 w-full
 max-w-[340px]
+mx-auto
+lg:mx-0
 ">
 
         <div className="
@@ -829,10 +834,6 @@ I USE AI TO EXPLORE MORE.
 
     min-w-0
     w-full
-
-    flex
-    justify-center
-    lg:justify-start
 
     overflow-visible
   "
