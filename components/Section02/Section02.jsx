@@ -769,7 +769,7 @@ lg:justify-items-stretch
 
       <div className="
 col-span-12
-lg:col-span-3
+lg:col-span-2
 
 flex
 flex-col
@@ -843,7 +843,7 @@ I USE AI TO EXPLORE MORE.
       <div
   className="
     col-span-12
-    lg:col-span-9
+    lg:col-span-10
 
     min-w-0
     w-full
