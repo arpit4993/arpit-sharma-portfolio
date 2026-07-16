@@ -656,7 +656,7 @@ export default function Section02() {
 
 .ai-stat-card{
 
-    width:calc(100% - 20px);
+    width:min(100%, 310px);
 
     margin-inline:auto;
 
@@ -711,7 +711,8 @@ export default function Section02() {
   <div className="
 max-w-[1600px]
 mx-auto
-px-4
+
+px-3
 sm:px-6
 lg:px-10
 xl:px-14
@@ -807,6 +808,8 @@ lg:mb-10
     xl:grid-cols-3
 
     gap-[clamp(16px,3vw,32px)]
+
+    justify-items-center
 
     min-w-0
   "
