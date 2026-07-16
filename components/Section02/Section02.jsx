@@ -799,8 +799,7 @@ lg:mb-10
   "
 >
   I DON'T USE AI TO CREATE.
-  <br className="hidden lg:block" />
-  {" "}
+  <br/>
   I USE AI TO EXPLORE MORE.
 </h3>
 
