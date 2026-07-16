@@ -748,11 +748,10 @@ export default function Section02() {
 w-full
 max-w-[1600px]
 mx-auto
-px-5
-sm:px-8
+px-4
+sm:px-6
 lg:px-10
 xl:px-14
-py-[clamp(60px,8vw,96px)]
 ">
 
     <div className="
@@ -787,8 +786,7 @@ lg:text-left
 w-full
 max-w-[340px]
 mx-auto
-px-2
-lg:px-0
+padding:clamp(12px,3vw,16px);
 ">
 
         <div className="
