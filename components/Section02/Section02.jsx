@@ -790,7 +790,7 @@ lg:mb-10
 
         </div>
 
-        <h2
+        <h1
   className="
     text-white
     uppercase
@@ -815,7 +815,7 @@ lg:text-left
 <br className="hidden lg:block" />
 I USE AI TO EXPLORE MORE.
 
-</h2>
+</h1>
 
 </div>
       </div>
