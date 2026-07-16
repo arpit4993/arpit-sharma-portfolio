@@ -768,7 +768,7 @@ justify-items-start
 
       <div className="
 col-span-12
-lg:col-span-2
+lg:col-span-4
 
 flex
 flex-col
@@ -838,7 +838,7 @@ I USE AI TO EXPLORE MORE.
       <div
   className="
     col-span-12
-    lg:col-span-10
+    lg:col-span-8
 
     min-w-0
     w-full
@@ -851,7 +851,7 @@ I USE AI TO EXPLORE MORE.
 className="
 grid
 w-full
-max-w-[1000px]
+max-w-[500px]
 mx-0
 px-2
 sm:px-0
