@@ -816,7 +816,7 @@ lg:mb-10
     min-w-0
     w-full
 
-    overflow-hidden
+    overflow-visible
   "
 >
 
