@@ -23,9 +23,10 @@ export default function Section02() {
 
     position:relative;
 
-    height:420px;
+    min-height:340px;
+    height:100%;
 
-    border-radius:24px;
+    border-radius:clamp(18px,2vw,24px);
 
     border:1px solid rgba(255,255,255,.08);
 
@@ -51,7 +52,7 @@ export default function Section02() {
 
 .ai-stat-card{
 
-    padding:28px;
+    padding:clamp(18px,4vw,28px);
 
     display:flex;
 
@@ -65,7 +66,7 @@ export default function Section02() {
 
     align-items:center;
 
-    margin-bottom:28px;
+    margin-bottom:clamp(18px,4vw,28px);
 
 }
 
@@ -73,13 +74,13 @@ export default function Section02() {
 
     margin-top:0px;
 
-    font-size:78px;
+    font-size:clamp(52px,10vw,78px);
 
     line-height:1;
 
     font-weight:300;
 
-    letter-spacing:-4px;
+    letter-spacing:clamp(-2px,-0.4vw,-4px);
 
     color:white;
 
@@ -87,7 +88,7 @@ export default function Section02() {
 
 .stat-number span{
 
-    font-size:42px;
+    font-size:clamp(28px,5vw,42px);
 
     font-weight:200;
 
@@ -97,9 +98,9 @@ export default function Section02() {
 
 .stat-heading{
 
-    margin-top:16px;
+    margin-top:clamp(12px,2vw,16px);
 
-    font-size:15px;
+    font-size:clamp(13px,2vw,15px);
 
     letter-spacing:.12em;
 
@@ -113,15 +114,15 @@ export default function Section02() {
 
 .stat-description{
 
-    margin-top:14px;
+     margin-top:clamp(10px,2vw,14px);
 
-    font-size:15px;
+    font-size:clamp(14px,2vw,15px);
 
-    line-height:1.9;
+    line-height:1.8;
 
     color:#9ca3af;
 
-    max-width:220px;
+    max-width:100%;
 
 }
 
@@ -143,13 +144,13 @@ export default function Section02() {
 
     position:absolute;
 
-    left:-12%;
+    left:-10%;
 
-    bottom:-55px;
+    bottom:clamp(-45px,-6vw,-55px);
 
-    width:125%;
+    width:120%;
 
-    height:130px;
+    height:clamp(90px,18vw,130px);
 
     border-radius:50%;
 
@@ -183,11 +184,11 @@ export default function Section02() {
 
     left:-8%;
 
-    bottom:28px;
+    bottom:clamp(18px,4vw,28px);
 
     width:116%;
 
-    height:58px;
+    height:clamp(38px,8vw,58px);
 
     border-top:
 
@@ -305,11 +306,11 @@ export default function Section02() {
 
 .stat-icon-circle{
 
-    width:48px;
+    width:clamp(40px,8vw,48px);
 
-    height:48px;
+    height:clamp(40px,8vw,48px);
 
-    border-radius:14px;
+    border-radius:clamp(10px,2vw,14px);
 
     display:flex;
 
@@ -397,13 +398,13 @@ export default function Section02() {
 
 .ai-stat-card:hover{
 
-    transform:translateY(-8px);
+    transform:translateY(clamp(-4px,-1vw,-8px));
 
     border-color:rgba(160,120,255,.22);
 
     box-shadow:
-        0 20px 50px rgba(0,0,0,.35),
-        0 0 40px rgba(130,90,255,.08);
+        0 16px 42px rgba(0,0,0,.32),
+        0 0 34px rgba(130,90,255,.08);
 
 }
 
@@ -418,7 +419,7 @@ export default function Section02() {
 
 .ai-stat-card:hover .stat-icon-circle{
 
-    transform:scale(1.08);
+    transform:scale(1.05);
 
     border-color:rgba(170,120,255,.30);
 
@@ -455,7 +456,7 @@ export default function Section02() {
 
     z-index:4;
 
-    border-radius:24px;
+    border-radius:clamp(18px,3vw,24px);
 
 }
 
@@ -465,13 +466,13 @@ export default function Section02() {
 
     position:absolute;
 
-    top:-60px;
+    top:-40px;
 
-    left:-140px;
+    left:-120px;
 
-    width:60px;
+    width:clamp(40px,8vw,60px);
 
-    height:520px;
+    height:120%;
 
     background:
 
@@ -594,9 +595,9 @@ export default function Section02() {
 
 .stat-icon-circle svg{
 
-    width:18px;
+    width:clamp(16px,3vw,18px);
 
-    height:18px;
+    height:clamp(16px,3vw,18px);
 
 }
 
@@ -604,7 +605,7 @@ export default function Section02() {
 
 .ai-stat-card:hover .stat-icon-circle svg{
 
-    transform:scale(1.08);
+    transform:scale(1.05);
 
     transition:.35s;
 
@@ -644,15 +645,46 @@ export default function Section02() {
 
 <section className="relative border-b border-white/10 bg-black">
 
-  <div className="max-w-[1600px] mx-auto px-8 xl:px-14 py-24">
+  <div className="
+max-w-[1600px]
+mx-auto
+px-4
+sm:px-6
+lg:px-10
+xl:px-14
+py-[clamp(60px,8vw,96px)]
+">
 
-    <div className="grid grid-cols-12 gap-12 items-start">
+    <div className="
+grid
+grid-cols-1
+lg:grid-cols-12
+gap-10
+lg:gap-12
+items-start
+">
 
       {/* ================= LEFT ================= */}
 
-      <div className="col-span-3">
+      <div className="
+col-span-12
+lg:col-span-3
 
-        <div className="flex items-center gap-6 mb-10">
+flex
+flex-col
+justify-center
+">
+
+        <div className="
+flex
+items-center
+
+gap-4
+sm:gap-6
+
+mb-8
+lg:mb-10
+">
 
           <span className="text-white text-lg font-light">
             02
@@ -668,36 +700,29 @@ export default function Section02() {
             uppercase
             font-black
             leading-[0.9]
-            tracking-[-2px]
-            text-[50px]
+            text-[clamp(34px,7vw,50px)]
+tracking-[-0.04em]
           "
         >
-          I DON'T
-          <br />
-
-          USE AI
-          <br />
-
-          TO CREATE.
-          <br />
-          <br />
-
-          I USE AI
-          <br />
-
-          TO EXPLORE
-          <br />
-
-          MORE.
+          I DON'T USE AI TO CREATE. I USE AI TO EXPLORE MORE.
         </h2>
 
       </div>
 
       {/* ================= RIGHT ================= */}
 
-      <div className="col-span-9">
+      <div className="
+col-span-12
+lg:col-span-9
+">
 
-        <div className="grid grid-cols-3 gap-8">
+        <div className="
+grid
+grid-cols-1
+sm:grid-cols-2
+xl:grid-cols-3
+gap-[clamp(18px,3vw,32px)]
+">
 
   {/* CARD 01 */}
 

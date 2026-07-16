@@ -11,6 +11,8 @@ import { useEffect, useState } from "react"
 
 import { Menu, X } from "lucide-react";
 
+import Link from "next/link";
+
 import {
   collection,
   getDocs,
@@ -133,9 +135,9 @@ return () => {};
           
           <div className="flex items-center justify-between w-full md:w-auto">
           
-          <a href="#top" className="text-2xl font-bold">
+          <Link href="/#top" className="text-2xl font-bold">
             {hero?.name || "Gokul Grover"}
-          </a>
+          </Link>
 
           <button
   onClick={() => setMobileMenu(true)}
@@ -148,15 +150,15 @@ return () => {};
 
           <nav className="hidden md:flex items-center gap-10 ml-auto text-sm uppercase tracking-wide text-white/80">
 
-  <a href="/#about">About</a>
+  <Link href="/#about">About</Link>
 
-  <a href="/#experience">Experience</a>
+  <Link href="/#experience">Experience</Link>
 
-  <a href="/#services">Services</a>
+  <Link href="/#services">Services</Link>
 
-  <a href="/#portfolio">Portfolio</a>
+  <Link href="/#portfolio">Portfolio</Link>
 
-  <a href="/#contact">Contact</a>
+  <Link href="/#contact">Contact</Link>
 
   <a
     href="/ai"
@@ -200,58 +202,57 @@ onClick={() => setMobileMenu(false)}
 
 <nav className="flex-1 flex flex-col justify-center items-center gap-7 text-[30px] font-black tracking-wide">
 
-<a
-href="#about"
+<Link
+href="/#about"
 onClick={()=>setMobileMenu(false)}
 >
 About
-</a>
+</Link>
 
-<a
-href="#experience"
+<Link
+href="/#experience"
 onClick={()=>setMobileMenu(false)}
 >
 Experience
-</a>
-
-<a
-href="#services"
+</Link>
+<Link
+href="/#services"
 onClick={()=>setMobileMenu(false)}
 >
 Services
-</a>
+</Link>
 
-<a
-href="#portfolio"
+<Link
+href="/#portfolio"
 onClick={()=>setMobileMenu(false)}
 >
 Portfolio
-</a>
+</Link>
 
-<a
-href="#contact"
+<Link
+href="/#contact"
 onClick={()=>setMobileMenu(false)}
 >
 Contact
-</a>
+</Link>
 
-<a
+<Link
 href="/ai"
 onClick={()=>setMobileMenu(false)}
 className="text-yellow-400"
 >
 AI Integration
-</a>
+</Link>
 
 <div className="w-full px-8 pt-6">
 
-  <a
+  <Link
     href="#contact"
     onClick={() => setMobileMenu(false)}
     className="w-full flex justify-center items-center bg-white text-black rounded-full py-4 font-bold text-lg"
   >
     Let’s Talk
-  </a>
+  </Link>
 
 </div>
 
