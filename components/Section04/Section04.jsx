@@ -3097,44 +3097,43 @@ box-shadow:
 
 @media (max-width:1279px){
 
-    .stack-card{
+.orbit-layout{
 
-        margin-top:48px;
+    display:flex;
 
-        height:auto;
+    flex-direction:column;
 
-        padding:28px 20px;
+    gap:40px;
 
-        align-items:flex-start;
+    width:100%;
 
-    }
+}
 
-    .orbit-layout{
+.orbit-left{
 
-        display:flex;
+    width:100%;
 
-        flex-direction:column;
+    display:flex;
 
-        align-items:flex-start;
+    justify-content:center;
 
-        gap:40px;
+    align-items:center;
 
-        width:100%;
+}
 
-    }
+.orbit-right{
 
-    .orbit-left,
-    .orbit-right{
+    width:100%;
 
-        width:100%;
+    display:flex;
 
-        justify-content:flex-start;
+    justify-content:flex-start;
 
-        align-items:flex-start;
+    align-items:flex-start;
 
-    }
+}
 
-    .orbit-container{
+.orbit-container{
 
     width:280px;
 
@@ -3142,8 +3141,8 @@ box-shadow:
 
     transform:none;
 
-    margin:0;
-
+    margin-inline:auto;
+    
 }
 
 .orbit-ring-outer{
