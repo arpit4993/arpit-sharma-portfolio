@@ -4,8 +4,6 @@ import { useEffect, useState } from "react"
 
 import { Menu, X } from "lucide-react";
 
-import { useSearchParams } from "next/navigation";
-
 import {
   collection,
   getDocs,
@@ -29,7 +27,6 @@ export default function HomePage() {
   const [footer, setFooter] = useState(null)
   const [loading, setLoading] = useState(true)
   const [mobileMenu, setMobileMenu] = useState(false);
-  const searchParams = useSearchParams();
 
   const [
     portfolioProjects,
