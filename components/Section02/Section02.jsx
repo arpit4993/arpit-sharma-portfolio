@@ -23,8 +23,15 @@ export default function Section02() {
 
     position:relative;
 
+    width:100%;
+
+    max-width:100%;
+
+    min-width:0;
+
     min-height:clamp(300px,60vw,340px);
-    height:100%;
+
+    height:auto;
 
     border-radius:clamp(18px,2vw,24px);
 
@@ -122,7 +129,9 @@ export default function Section02() {
 
     color:#9ca3af;
 
-    max-width:100%;
+    width:100%;
+max-width:100%;
+min-width:0;
 
     overflow-wrap:anywhere;
 
@@ -702,7 +711,9 @@ lg:mb-10
     uppercase
     font-black
 
-    text-[clamp(24px,9vw,50px)]
+    w-full
+
+    text-[clamp(22px,8vw,50px)]
 
     leading-[0.95]
 
@@ -723,18 +734,31 @@ lg:mb-10
 
       {/* ================= RIGHT ================= */}
 
-      <div className="
-col-span-12
-lg:col-span-9
-">
+      <div
+  className="
+    col-span-12
+    lg:col-span-9
 
-        <div className="
-grid
-grid-cols-1
-sm:grid-cols-2
-xl:grid-cols-3
-gap-[clamp(18px,3vw,32px)]
-">
+    min-w-0
+    w-full
+    overflow-hidden
+  "
+>
+
+        <div
+  className="
+    grid
+    w-full
+
+    grid-cols-1
+    sm:grid-cols-2
+    xl:grid-cols-3
+
+    gap-[clamp(16px,3vw,32px)]
+
+    min-w-0
+  "
+>
 
   {/* CARD 01 */}
 
