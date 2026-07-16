@@ -49,7 +49,7 @@ export default function Section07() {
 
     width:100%;
 
-    padding:120px 0 140px;
+    padding:clamp(70px,8vw,120px) 0 clamp(80px,8vw,140px);
 
 }
 
@@ -61,7 +61,7 @@ export default function Section07() {
 
     margin:0 auto;
 
-    padding:0 48px;
+    padding:0 clamp(16px,4vw,48px);
 
 }
 
@@ -106,6 +106,8 @@ export default function Section07() {
     display:grid;
 
     grid-template-columns:1fr 1fr 360px;
+
+    gap:0;
 
     align-items:center;
 
@@ -336,7 +338,7 @@ export default function Section07() {
 
 .section07-title{
 
-    font-size:64px;
+    font-size:clamp(34px,8vw,64px);
 
     font-weight:800;
 
@@ -752,6 +754,53 @@ export default function Section07() {
     text-shadow:
 
         0 0 18px rgba(255,255,255,.08);
+
+}
+
+/* =====================================================
+      SECTION 07 RESPONSIVE PART 1
+===================================================== */
+
+@media (max-width:1023px){
+
+.section07-panel{
+
+    grid-template-columns:1fr;
+
+    min-height:auto;
+
+}
+
+.section07-left,
+.section07-center,
+.section07-right{
+
+    width:100%;
+
+    padding:28px 24px;
+
+    justify-content:flex-start;
+
+    align-items:flex-start;
+
+    text-align:left;
+
+    border-right:none;
+
+}
+
+.section07-left::after,
+.section07-center::after{
+
+    display:none;
+
+}
+
+.section07-right{
+
+    padding-top:0;
+
+}
 
 }
 
