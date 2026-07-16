@@ -658,7 +658,7 @@ export default function Section02() {
 
     width:100%;
     max-width:310px;
-    margin:0 auto;
+    margin:0;
     padding:18px;
 
 }
@@ -832,7 +832,7 @@ xl:grid-cols-3
 
 gap-[clamp(16px,3vw,32px)]
 
-place-items-center
+justify-items-start
 
 mx-auto
 
