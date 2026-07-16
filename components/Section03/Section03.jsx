@@ -30,9 +30,9 @@ export default function Section03() {
 
     position:absolute;
 
-    left:4%;
+    left:clamp(18px,4%,60px);
 
-    right:4%;
+    right:clamp(18px,4%,60px);
 
     top:22px;
 
@@ -46,13 +46,15 @@ export default function Section03() {
 
     display:grid;
 
-    grid-template-columns:repeat(7,1fr);
+    grid-template-columns:repeat(7,minmax(0,1fr));
 
-    gap:24px;
+    gap:clamp(16px,2vw,24px);
 
     position:relative;
 
     z-index:2;
+
+    width:100%;
 
 }
 
@@ -66,9 +68,9 @@ export default function Section03() {
 
 .timeline-circle{
 
-    width:46px;
+    width:clamp(42px,5vw,46px);
 
-    height:46px;
+    height:clamp(42px,5vw,46px);
 
     border-radius:50%;
 
@@ -132,7 +134,7 @@ export default function Section03() {
 
     color:#ffffff;
 
-    font-size:15px;
+    font-size:clamp(14px,1vw,15px);
 
     line-height:1.45;
 
@@ -152,9 +154,9 @@ export default function Section03() {
 
     margin-top:18px;
 
-    width:42px;
+    width:clamp(38px,5vw,42px);
 
-    height:42px;
+    height:clamp(38px,5vw,42px);
 
     display:flex;
 
@@ -186,13 +188,17 @@ export default function Section03() {
 
     margin-top:18px;
 
-    max-width:170px;
+    width:100%;
+
+    max-width:100%;
 
     color:#8e8e8e;
 
-    font-size:14px;
+    font-size:clamp(13px,1vw,14px);
 
-    line-height:1.8;
+    line-height:1.75;
+
+    overflow-wrap:anywhere;
 
 }
 
@@ -206,6 +212,8 @@ export default function Section03() {
 
     align-items:center;
 
+    flex-wrap:wrap;
+
     gap:10px;
 
     margin-top:18px;
@@ -214,9 +222,9 @@ export default function Section03() {
 
 .timeline-mini-icon{
 
-    width:34px;
+    width:clamp(30px,4vw,34px);
 
-    height:34px;
+    height:clamp(30px,4vw,34px);
 
     border-radius:10px;
 
@@ -241,9 +249,9 @@ export default function Section03() {
 
 .timeline-mini-badge{
 
-    width:34px;
+    width:clamp(30px,4vw,34px);
 
-    height:34px;
+    height:clamp(30px,4vw,34px);
 
     border-radius:50%;
 
@@ -278,9 +286,13 @@ export default function Section03() {
 
 }
 
-.timeline-step:hover{
+@media (hover:none){
 
-    transform:translateY(-8px);
+    .timeline-step:hover{
+
+        transform:none;
+
+    }
 
 }
 
@@ -459,7 +471,9 @@ export default function Section03() {
 
 .timeline-step{
 
-    padding-right:18px;
+    padding-right:clamp(0px,1vw,18px);
+
+    min-width:0;
 
 }
 
@@ -479,6 +493,167 @@ export default function Section03() {
 
 }
 
+@media (max-width:640px){
+
+  .timeline-line{
+      display:none;
+  }
+
+  .timeline-wrapper{
+      overflow:visible;
+  }
+
+  .timeline-grid{
+      display:flex;
+      flex-direction:column;
+      gap:42px;
+      width:100%;
+  }
+
+  .timeline-step{
+      width:100%;
+      padding-right:0;
+      align-items:flex-start;
+      text-align:left;
+  }
+
+  .timeline-arrow{
+      display:none;
+  }
+
+}
+
+@media (max-width:640px){
+
+  /* ---------- Circle ---------- */
+
+  .timeline-circle{
+
+      width:42px;
+      height:42px;
+
+      font-size:13px;
+
+  }
+
+  /* ---------- Title ---------- */
+
+  .timeline-title{
+
+      margin-top:14px;
+
+      min-height:auto;
+
+      font-size:15px;
+
+      line-height:1.45;
+
+      text-align:left;
+
+  }
+
+  /* ---------- Icons ---------- */
+
+  .timeline-icon{
+
+      width:40px;
+      height:40px;
+
+      margin-top:14px;
+
+  }
+
+  .timeline-icon-group{
+
+      margin-top:14px;
+
+      gap:8px;
+
+  }
+
+  .timeline-mini-icon,
+  .timeline-mini-badge{
+
+      width:32px;
+      height:32px;
+
+  }
+
+  /* ---------- Description ---------- */
+
+  .timeline-description{
+
+      margin-top:14px;
+
+      width:100%;
+      max-width:100%;
+
+      min-height:auto;
+
+      font-size:14px;
+
+      line-height:1.7;
+
+      text-align:left;
+
+  }
+
+}
+
+/* =====================================================
+      SECTION 03 - RESPONSIVE (TABLET)
+===================================================== */
+
+@media (min-width:641px) and (max-width:1023px){
+
+  .timeline-line{
+      display:none;
+  }
+
+  .timeline-wrapper{
+      overflow:visible;
+  }
+
+  .timeline-grid{
+
+      display:grid;
+
+      grid-template-columns:repeat(2,minmax(0,1fr));
+
+      gap:40px 28px;
+
+  }
+
+  .timeline-step{
+
+      padding-right:0;
+
+  }
+
+  .timeline-arrow{
+
+      display:none;
+
+  }
+
+  .timeline-title{
+
+      min-height:auto;
+
+  }
+
+  .timeline-description{
+
+      max-width:100%;
+
+      min-height:auto;
+
+  }
+
+}
+
+
+
       `}</style>
 
 {/* =====================================================
@@ -487,24 +662,51 @@ export default function Section03() {
 
 <section className="relative border-b border-white/10 bg-black">
 
-    <div className="max-w-[1600px] mx-auto px-8 xl:px-14 py-20">
+    <div
+  className="
+    max-w-[1600px]
+    mx-auto
+
+    px-4
+    sm:px-6
+    lg:px-10
+    xl:px-14
+
+    py-[clamp(60px,8vw,96px)]
+  "
+>
 
        {/* -------Heading---- */}
 
-        <div className="flex items-center gap-6 mb-16">
+        <div
+  className="
+    flex
+    items-center
 
+    gap-4
+    sm:gap-6
+
+    mb-10
+    lg:mb-16
+  "
+>
             <span className="text-white text-lg font-light">
                 03
             </span>
 
             <p
-                className="
-                    uppercase
-                    tracking-[0.35em]
-                    text-[13px]
-                    text-[#9CA3AF]
-                "
-            >
+className="
+uppercase
+
+tracking-[0.18em]
+sm:tracking-[0.35em]
+
+text-[11px]
+sm:text-[13px]
+
+text-[#9CA3AF]
+"
+>
                 MY AI OPERATING SYSTEM.
             </p>
 
@@ -529,9 +731,7 @@ export default function Section03() {
     </div>
 
     <h4 className="timeline-title">
-        CLIENT
-        <br />
-        BRIEF
+        CLIENT BRIEF
     </h4>
 
     <div className="timeline-icon">
@@ -555,9 +755,7 @@ export default function Section03() {
     </div>
 
     <h4 className="timeline-title">
-        RESEARCH
-        <br />
-        & STRATEGY
+        RESEARCH & STRATEGY
     </h4>
 
     <div className="timeline-icon-group">
@@ -588,9 +786,7 @@ export default function Section03() {
     </div>
 
     <h4 className="timeline-title">
-        CONCEPT
-        <br />
-        DEVELOPMENT
+        CONCEPT DEVELOPMENT
     </h4>
 
     <div className="timeline-icon-group">
@@ -622,9 +818,7 @@ export default function Section03() {
     </div>
 
     <h4 className="timeline-title">
-        VISUAL
-        <br />
-        PRODUCTION
+        VISUAL PRODUCTION
     </h4>
 
     <div className="timeline-icon-group">
@@ -656,9 +850,7 @@ export default function Section03() {
     </div>
 
     <h4 className="timeline-title">
-        VIDEO
-        <br />
-        PRODUCTION
+        VIDEO PRODUCTION
     </h4>
 
     <div className="timeline-icon-group">
@@ -694,9 +886,7 @@ export default function Section03() {
     </div>
 
     <h4 className="timeline-title">
-        HUMAN
-        <br />
-        REFINEMENT
+        HUMAN REFINEMENT
     </h4>
 
     <div className="timeline-icon">
@@ -716,9 +906,7 @@ export default function Section03() {
     </div>
 
     <h4 className="timeline-title">
-        FINAL
-        <br />
-        DELIVERY
+        FINAL DELIVERY
     </h4>
 
     <div className="timeline-icon">
