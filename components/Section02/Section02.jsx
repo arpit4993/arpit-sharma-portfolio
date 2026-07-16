@@ -696,7 +696,7 @@ lg:mb-10
 
         </div>
 
-        <h2
+        <h3
   className="
     text-white
     uppercase
@@ -717,7 +717,7 @@ lg:mb-10
   <br className="hidden lg:block" />
   {" "}
   I USE AI TO EXPLORE MORE.
-</h2>
+</h3>
 
       </div>
 
