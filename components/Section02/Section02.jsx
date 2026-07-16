@@ -766,6 +766,11 @@ text-center
 lg:text-left
 ">
 
+    <div className="
+w-full
+max-w-[340px]
+">
+
         <div className="
 flex
 items-center
@@ -812,6 +817,7 @@ I USE AI TO EXPLORE MORE.
 
 </h2>
 
+</div>
       </div>
 
       {/* ================= RIGHT ================= */}
