@@ -658,8 +658,7 @@ export default function Section02() {
 
     width:100%;
     max-width:310px;
-    margin-left:12px;
-    margin-right:0;
+    margin:0 auto;
     padding:18px;
 
 }
@@ -734,7 +733,7 @@ export default function Section02() {
 max-w-[1600px]
 mx-auto
 
-px-3
+px-4
 sm:px-6
 lg:px-10
 xl:px-14
@@ -759,6 +758,12 @@ lg:col-span-3
 flex
 flex-col
 justify-center
+
+items-center
+lg:items-start
+
+text-center
+lg:text-left
 ">
 
         <div className="
@@ -787,8 +792,8 @@ lg:mb-10
     font-black
 
     w-full
-text-left
-max-[640px]:text-center
+text-center
+lg:text-left
 
     text-[clamp(22px,8vw,50px)]
 
@@ -801,13 +806,10 @@ max-[640px]:text-center
     max-w-full
   "
 >
-  I DON'T USE AI
-  <br/>
-  TO CREATE.
-  <br/>
-  I USE AI TO
-  <br/>
-  EXPLORE MORE.
+  I DON'T USE AI TO CREATE.
+<br className="hidden lg:block" />
+I USE AI TO EXPLORE MORE.
+
 </h2>
 
       </div>
@@ -822,6 +824,10 @@ max-[640px]:text-center
     min-w-0
     w-full
 
+    flex
+    justify-center
+    lg:justify-start
+
     overflow-visible
   "
 >
@@ -831,6 +837,7 @@ max-[640px]:text-center
 grid
 
 w-full
+max-w-[1000px]
 
 grid-cols-1
 sm:grid-cols-2
@@ -838,11 +845,9 @@ xl:grid-cols-3
 
 gap-[clamp(16px,3vw,32px)]
 
-justify-items-start
+justify-items-center
 
 mx-auto
-
-max-w-full
 "
 >
 
