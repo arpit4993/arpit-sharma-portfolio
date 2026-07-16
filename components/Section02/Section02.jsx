@@ -730,7 +730,7 @@ export default function Section02() {
     .ai-stat-card{
         width:100%;
         max-width:320px;
-        margin-left:10px;
+        margin-left:5px;
         margin-right:0;
     }
 
