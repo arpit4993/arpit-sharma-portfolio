@@ -700,6 +700,16 @@ export default function Section02() {
 
 }
 
+@media (max-width:640px){
+
+  .ai-stat-card{
+
+      width:100%;
+
+  }
+
+}
+
       `}</style>
 
 {/* =====================================================
@@ -795,35 +805,29 @@ lg:mb-10
     min-w-0
     w-full
 
-    flex
-    justify-center
-    items-center
-
-    lg:block
-
     overflow-hidden
   "
 >
 
         <div
   className="
-    grid
+grid
 
-    w-full
-    max-w-full
+w-full
 
-    grid-cols-1
-    sm:grid-cols-2
-    xl:grid-cols-3
+grid-cols-1
+sm:grid-cols-2
+xl:grid-cols-3
 
-    gap-[clamp(16px,3vw,32px)]
+gap-[clamp(16px,3vw,32px)]
 
-    justify-items-center
+justify-items-center
 
-    min-w-0
+mx-auto
 
-    mx-auto
-  "
+max-w-[310px]
+sm:max-w-full
+"
 >
 
   {/* CARD 01 */}
