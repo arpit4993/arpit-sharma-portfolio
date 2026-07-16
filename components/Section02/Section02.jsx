@@ -851,7 +851,6 @@ I USE AI TO EXPLORE MORE.
 className="
 grid
 w-full
-max-w-[500px]
 mx-0
 px-2
 sm:px-0
