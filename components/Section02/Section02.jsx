@@ -656,10 +656,9 @@ export default function Section02() {
 
 .ai-stat-card{
 
-    width:min(100%, 310px);
-
-    margin-inline:auto;
-
+    width:100%;
+    max-width:310px;
+    margin:0 auto;
     padding:18px;
 
 }
@@ -833,12 +832,11 @@ xl:grid-cols-3
 
 gap-[clamp(16px,3vw,32px)]
 
-justify-items-center
+place-items-center
 
 mx-auto
 
-max-w-[310px]
-sm:max-w-full
+max-w-full
 "
 >
 
