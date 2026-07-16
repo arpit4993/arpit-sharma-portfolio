@@ -703,9 +703,21 @@ export default function Section02() {
 @media (max-width:640px){
 
   .ai-stat-card{
-
       width:100%;
+      align-items:center;
+      text-align:center;
+  }
 
+  .stat-icon{
+      width:100%;
+      justify-content:center;
+  }
+
+  .stat-number,
+  .stat-heading,
+  .stat-description{
+      text-align:center;
+      width:100%;
   }
 
 }
