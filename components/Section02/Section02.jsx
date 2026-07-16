@@ -761,8 +761,7 @@ lg:grid-cols-12
 gap-10
 lg:gap-12
 items-start
-justify-items-center
-lg:justify-items-stretch
+justify-items-start
 ">
 
       {/* ================= LEFT ================= */}
@@ -775,17 +774,14 @@ flex
 flex-col
 justify-center
 
-items-center
-lg:items-start
-
-text-center
-lg:text-left
+items-start
+text-left
 ">
 
     <div className="
 w-full
 max-w-[340px]
-mx-auto
+mx-0
 padding:clamp(12px,3vw,16px);
 ">
 
@@ -815,8 +811,7 @@ lg:mb-10
     font-black
 
     w-full
-text-center
-lg:text-left
+text-left
 
     text-[clamp(22px,8vw,50px)]
 
@@ -857,14 +852,14 @@ className="
 grid
 w-full
 max-w-[1000px]
-mx-auto
+mx-0
 px-2
 sm:px-0
 grid-cols-1
 sm:grid-cols-2
 xl:grid-cols-3
 gap-[clamp(16px,3vw,32px)]
-justify-items-center
+justify-items-start
 "
 >
 

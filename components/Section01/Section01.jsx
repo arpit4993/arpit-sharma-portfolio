@@ -1485,11 +1485,8 @@ order-1
 flex
 flex-col
 justify-center
-items-center
-lg:items-start
-
-text-center
-lg:text-left
+items-start
+text-left
 
 px-0
 ">
@@ -1540,8 +1537,7 @@ w-full
 font-black
 uppercase
 
-text-center
-lg:text-left
+text-left
 
 leading-[0.9]
 
@@ -1563,8 +1559,7 @@ lg:text-[58px]
 
 max-w-[330px]
 
-mx-auto
-lg:mx-0
+mx-0
 
 px-0
 
@@ -1587,8 +1582,7 @@ sm:leading-8
     group
     mt-10
     inline-flex
-self-center
-lg:self-start
+self-start
     w-full
 
 max-w-[280px]
