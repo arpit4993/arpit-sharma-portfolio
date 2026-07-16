@@ -730,8 +730,8 @@ export default function Section02() {
     .ai-stat-card{
         width:100%;
         max-width:320px;
-        margin-left:auto;
-        margin-right:auto;
+        margin-left:40px;
+        margin-right:0;
     }
 
 }
@@ -853,7 +853,7 @@ grid
 w-full
 max-w-[1000px]
 mx-0
-px-10
+px-2
 sm:px-0
 grid-cols-1
 sm:grid-cols-2
