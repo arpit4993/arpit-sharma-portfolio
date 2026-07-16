@@ -941,7 +941,7 @@ export default function Section04() {
 
     min-height:390px;
 
-    padding:24px;
+    padding:clamp(20px,2vw,24px);
 
 }
 
@@ -973,7 +973,7 @@ export default function Section04() {
 
     padding:14px 0;
 
-    min-height:60px;
+    min-height:auto;
 
     gap:14px;
 
@@ -2975,6 +2975,413 @@ box-shadow:
 
 }
 
+/* =====================================================
+      SECTION 04 + 05 RESPONSIVE PART 1
+===================================================== */
+
+@media (max-width:1279px){
+
+    .section45-heading{
+
+        font-size:clamp(34px,9vw,60px);
+
+        line-height:.95;
+
+        letter-spacing:-1px;
+
+    }
+
+    .section45-description{
+
+        max-width:100%;
+
+    }
+
+}
+
+/* =====================================================
+      SECTION 04 RESPONSIVE PART 2
+===================================================== */
+
+@media (max-width:1279px){
+
+    .comparison-wrapper{
+
+        display:flex;
+
+        flex-direction:column;
+
+        gap:24px;
+
+        height:auto;
+
+        margin-top:48px;
+
+    }
+
+    .compare-center-divider{
+
+        display:none;
+
+    }
+
+    .compare-column{
+
+        width:100%;
+
+        min-height:auto;
+
+        padding:22px;
+
+    }
+
+    .compare-title{
+
+    justify-content:flex-start;
+
+    text-align:left;
+
+}
+
+.compare-row{
+
+    justify-content:flex-start;
+
+    align-items:flex-start;
+
+    gap:16px;
+
+}
+
+.compare-row span{
+
+    width:56px;
+
+    flex-shrink:0;
+
+    text-align:left;
+
+    font-size:28px;
+
+}
+
+.compare-row p{
+
+    flex:1;
+
+    text-align:left;
+
+    line-height:1.5;
+
+}
+
+.compare-bottom-glow{
+
+    bottom:-42px;
+
+    height:90px;
+
+}
+
+.compare-reflection{
+
+    display:none;
+
+}
+
+}
+
+/* =====================================================
+      SECTION 05 RESPONSIVE PART 3
+===================================================== */
+
+@media (max-width:1279px){
+
+    .stack-card{
+
+        margin-top:48px;
+
+        height:auto;
+
+        padding:28px 20px;
+
+        align-items:flex-start;
+
+    }
+
+    .orbit-layout{
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:40px;
+
+        width:100%;
+
+    }
+
+    .orbit-left,
+    .orbit-right{
+
+        width:100%;
+
+        justify-content:flex-start;
+
+        align-items:flex-start;
+
+    }
+
+    .orbit-container{
+
+    width:280px;
+
+    height:280px;
+
+    transform:none;
+
+    margin:0;
+
+}
+
+.orbit-ring-outer{
+
+    width:220px;
+
+    height:220px;
+
+}
+
+.orbit-ring-inner{
+
+    width:145px;
+
+    height:145px;
+
+}
+
+.orbit-core{
+
+    width:82px;
+
+    height:82px;
+
+}
+
+.orbit-core-text{
+
+    font-size:12px;
+
+}
+
+.gpt-card{
+
+    width:100%;
+
+    max-width:100%;
+
+    height:auto;
+
+    min-height:auto;
+
+    margin:0;
+
+    padding:24px;
+
+}
+
+.gpt-title{
+
+    font-size:15px;
+
+}
+
+.gpt-purpose-list li,
+.gpt-usecases-list li{
+
+    font-size:13px;
+
+    line-height:1.5;
+
+}
+
+.gpt-usage-caption{
+
+    max-width:100%;
+
+}
+
+.orbit-label{
+
+    font-size:12px;
+
+}
+
+.label-right{
+
+    right:-22px;
+
+}
+
+.label-left{
+
+    left:-22px;
+
+}
+
+.label-top-right,
+.label-bottom-right{
+
+    right:8px;
+
+}
+
+.label-top-left,
+.label-bottom-left{
+
+    left:8px;
+
+}
+
+.orbit-node{
+
+    width:8px;
+    height:8px;
+
+}
+
+.orbit-node::before{
+
+    height:74px;
+
+}
+
+.orbit-glow{
+
+    width:180px;
+
+    height:180px;
+
+    filter:blur(30px);
+
+}
+
+.orbit-container::before{
+
+    width:280px;
+
+    height:280px;
+
+}
+
+.orbit-container::after{
+
+    width:320px;
+
+    height:320px;
+
+}
+
+@media (hover:none){
+
+    .orbit-container:hover{
+
+        transform:none;
+
+    }
+
+    .orbit-node:hover{
+
+        transform:none;
+
+    }
+
+    .compare-column:hover{
+
+        transform:none;
+
+    }
+
+    .compare-row:hover{
+
+        padding-left:0;
+
+        background:transparent;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .section45-heading{
+
+        font-size:34px;
+
+        line-height:1;
+
+    }
+
+    .compare-row span{
+
+        width:46px;
+
+        font-size:24px;
+
+    }
+
+    .compare-row p{
+
+        font-size:14px;
+
+    }
+
+    .orbit-container{
+
+        width:250px;
+
+        height:250px;
+
+    }
+
+    .orbit-ring-outer{
+
+        width:190px;
+
+        height:190px;
+
+    }
+
+    .orbit-ring-inner{
+
+        width:125px;
+
+        height:125px;
+
+    }
+
+    .orbit-core{
+
+        width:68px;
+
+        height:68px;
+
+    }
+
+    .gpt-card{
+
+        padding:20px;
+
+    }
+
+}
+
+}
+
+
+
       `}</style>
 
 {/* =====================================================
@@ -2983,15 +3390,42 @@ box-shadow:
 
 <section className="relative border-b border-white/10 bg-black">
 
-    <div className="max-w-[1700px] mx-auto px-10 py-28">
+    <div
+className="
+max-w-[1700px]
+mx-auto
 
-        <div className="grid grid-cols-20 gap-20">
+px-4
+sm:px-6
+lg:px-10
+xl:px-14
+
+py-[clamp(70px,8vw,110px)]
+"
+>
+
+        <div
+className="
+grid
+
+grid-cols-1
+xl:grid-cols-20
+
+gap-16
+xl:gap-20
+"
+>
 
             {/* =========================
                     LEFT
             ========================= */}
 
-            <div className="col-span-9">
+            <div
+className="
+col-span-1
+xl:col-span-9
+"
+>
 
                 <div className="flex items-center gap-6 mb-10">
 
@@ -3103,9 +3537,23 @@ box-shadow:
                     RIGHT
             ========================= */}
 
-            <div className="col-span-11">
+            <div
+className="
+col-span-1
+xl:col-span-11
+"
+>
 
-                <div className="flex items-center gap-6 mb-10">
+                <div className="
+flex
+items-center
+
+gap-4
+sm:gap-6
+
+mb-8
+lg:mb-10
+">
 
                     <span className="text-white text-lg">
                         05
