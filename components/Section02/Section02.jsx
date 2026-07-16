@@ -721,6 +721,21 @@ export default function Section02() {
 
 }
 
+@media (max-width:640px){
+
+    section{
+        overflow-x:hidden;
+    }
+
+    .ai-stat-card{
+        width:100%;
+        max-width:320px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+}
+
       `}</style>
 
 {/* =====================================================
@@ -733,9 +748,8 @@ export default function Section02() {
 w-full
 max-w-[1600px]
 mx-auto
-
-px-4
-sm:px-6
+px-5
+sm:px-8
 lg:px-10
 xl:px-14
 py-[clamp(60px,8vw,96px)]
@@ -773,7 +787,8 @@ lg:text-left
 w-full
 max-w-[340px]
 mx-auto
-lg:mx-0
+px-2
+lg:px-0
 ">
 
         <div className="
@@ -840,21 +855,18 @@ I USE AI TO EXPLORE MORE.
 >
 
         <div
-  className="
+className="
 grid
-
 w-full
 max-w-[1000px]
-
+mx-auto
+px-2
+sm:px-0
 grid-cols-1
 sm:grid-cols-2
 xl:grid-cols-3
-
 gap-[clamp(16px,3vw,32px)]
-
 justify-items-center
-
-mx-auto
 "
 >
 
