@@ -801,9 +801,13 @@ max-[640px]:text-center
     max-w-full
   "
 >
-  I DON'T USE AI TO CREATE.
+  I DON'T USE AI
   <br/>
-  I USE AI TO EXPLORE MORE.
+  TO CREATE.
+  <br/>
+  I USE AI TO
+  <br/>
+  EXPLORE MORE.
 </h2>
 
       </div>
