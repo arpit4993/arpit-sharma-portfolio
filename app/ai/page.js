@@ -9,6 +9,8 @@ import Section07 from "@/components/Section07/Section07";
 
 import { useEffect, useState } from "react"
 
+import { Menu, X } from "lucide-react";
+
 import {
   collection,
   getDocs,
@@ -24,6 +26,7 @@ export default function HomePage() {
   const [hero, setHero] = useState(null)
   const [footer, setFooter] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [mobileMenu, setMobileMenu] = useState(false);
 
   useEffect(() => {
 
@@ -126,12 +129,24 @@ return () => {};
     >
 
       <header className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-20 flex items-center">
+          
+          <div className="flex items-center justify-between w-full md:w-auto">
+          
           <a href="#top" className="text-2xl font-bold">
             {hero?.name || "Gokul Grover"}
           </a>
 
-          <nav className="hidden md:flex items-center gap-10 text-sm uppercase tracking-wide text-white/80">  
+          <button
+  onClick={() => setMobileMenu(true)}
+  className="md:hidden text-white"
+>
+  <Menu size={30} />
+</button>
+
+</div>
+
+          <nav className="hidden md:flex items-center gap-10 ml-auto text-sm uppercase tracking-wide text-white/80">
 
   <a href="/#about">About</a>
 
@@ -152,16 +167,99 @@ return () => {};
 
 </nav>
 
-        <div className="flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-4 ml-10">
           <a
   href="/#contact"
-  className="bg-white text-black px-5 sm:px-8 py-3 rounded-full font-semibold text-sm sm:text-base"
+  className="hidden sm:flex bg-white text-black px-5 sm:px-8 py-3 rounded-full font-semibold text-sm sm:text-base"
 >
             Let’s Talk
           </a>
           </div>
         </div>
       </header>
+
+      {mobileMenu && (
+
+<div className="fixed inset-0 bg-black z-[999] flex flex-col">
+
+<div className="flex justify-between items-center h-20 px-6 border-b border-white/10">
+
+<h2 className="text-2xl font-bold">
+{hero?.name}
+</h2>
+
+<button
+onClick={() => setMobileMenu(false)}
+>
+
+<X size={34} />
+
+</button>
+
+</div>
+
+<nav className="flex-1 flex flex-col justify-center items-center gap-7 text-[30px] font-black tracking-wide">
+
+<a
+href="#about"
+onClick={()=>setMobileMenu(false)}
+>
+About
+</a>
+
+<a
+href="#experience"
+onClick={()=>setMobileMenu(false)}
+>
+Experience
+</a>
+
+<a
+href="#services"
+onClick={()=>setMobileMenu(false)}
+>
+Services
+</a>
+
+<a
+href="#portfolio"
+onClick={()=>setMobileMenu(false)}
+>
+Portfolio
+</a>
+
+<a
+href="#contact"
+onClick={()=>setMobileMenu(false)}
+>
+Contact
+</a>
+
+<a
+href="/ai"
+onClick={()=>setMobileMenu(false)}
+className="text-yellow-400"
+>
+AI Integration
+</a>
+
+<div className="w-full px-8 pt-6">
+
+  <a
+    href="#contact"
+    onClick={() => setMobileMenu(false)}
+    className="w-full flex justify-center items-center bg-white text-black rounded-full py-4 font-bold text-lg"
+  >
+    Let’s Talk
+  </a>
+
+</div>
+
+</nav>
+
+</div>
+
+)}
 
       <Section01 />
 
