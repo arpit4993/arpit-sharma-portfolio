@@ -794,6 +794,13 @@ lg:mb-10
 
     min-w-0
     w-full
+
+    flex
+    justify-center
+    items-center
+
+    lg:block
+
     overflow-hidden
   "
 >
@@ -801,7 +808,9 @@ lg:mb-10
         <div
   className="
     grid
+
     w-full
+    max-w-full
 
     grid-cols-1
     sm:grid-cols-2
@@ -812,6 +821,8 @@ lg:mb-10
     justify-items-center
 
     min-w-0
+
+    mx-auto
   "
 >
 
