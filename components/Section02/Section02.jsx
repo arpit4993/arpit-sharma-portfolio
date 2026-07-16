@@ -658,7 +658,8 @@ export default function Section02() {
 
     width:100%;
     max-width:310px;
-    margin:0;
+    margin-left:12px;
+    margin-right:0;
     padding:18px;
 
 }
@@ -779,13 +780,15 @@ lg:mb-10
 
         </div>
 
-        <h3
+        <h2
   className="
     text-white
     uppercase
     font-black
 
     w-full
+text-left
+max-[640px]:text-center
 
     text-[clamp(22px,8vw,50px)]
 
@@ -801,7 +804,7 @@ lg:mb-10
   I DON'T USE AI TO CREATE.
   <br/>
   I USE AI TO EXPLORE MORE.
-</h3>
+</h2>
 
       </div>
 
