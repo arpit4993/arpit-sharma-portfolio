@@ -15,6 +15,15 @@ export default function Section01() {
 
   const cubeSceneRef = useRef(null);
 
+  const scrollToSection = (id) => {
+
+  document.getElementById(id)?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+
+};
+
 useEffect(() => {
 
   const cube = cubeSceneRef.current;
@@ -1387,7 +1396,9 @@ height:clamp(24px,6vw,30px);
 
       `}</style>
 
-<section className="relative w-full border-t border-white/10 border-b border-white/10 bg-black overflow-hidden">
+<section
+id="section01"
+className="relative w-full border-t border-white/10 border-b border-white/10 bg-black overflow-hidden">
 
   {/* Background Glow */}
   <div className="absolute inset-0">
@@ -1578,6 +1589,7 @@ sm:leading-8
 
   {/* Button */}
   <button
+  onClick={() => scrollToSection("workflow-panel")}
   className="
     group
     mt-10
@@ -1722,11 +1734,17 @@ lg:justify-end
 items-center
 ">
 
-    <div className="workflow-panel">
+    <div
+  id="workflow-panel"
+  className="workflow-panel"
+>
 
     <div className="workflow-list">
 
-    <div className="workflow-item active">
+    <div
+  className="workflow-item active"
+  onClick={() => scrollToSection("section01")}
+>
 
         <div className="workflow-number">01</div>
 
@@ -1744,7 +1762,10 @@ items-center
 
     </div>
 
-    <div className="workflow-item">
+    <div
+  className="workflow-item"
+  onClick={() => scrollToSection("section02")}
+>
 
         <div className="workflow-number">02</div>
 
@@ -1762,7 +1783,10 @@ items-center
 
     </div>
 
-    <div className="workflow-item">
+    <div
+  className="workflow-item"
+  onClick={() => scrollToSection("section03")}
+>
 
         <div className="workflow-number">03</div>
 
@@ -1780,7 +1804,10 @@ items-center
 
     </div>
 
-    <div className="workflow-item">
+    <div
+  className="workflow-item"
+  onClick={() => scrollToSection("section04")}
+>
 
         <div className="workflow-number">04</div>
 
@@ -1798,7 +1825,10 @@ items-center
 
     </div>
 
-    <div className="workflow-item">
+    <div
+  className="workflow-item"
+  onClick={() => scrollToSection("section05")}
+>
 
         <div className="workflow-number">05</div>
 
@@ -1816,7 +1846,10 @@ items-center
 
     </div>
 
-    <div className="workflow-item">
+    <div
+  className="workflow-item"
+  onClick={() => scrollToSection("section06")}
+>
 
         <div className="workflow-number">06</div>
 

@@ -3395,7 +3395,8 @@ box-shadow:
         SECTION 04+05 V2 - PART 1.1
 ===================================================== */}
 
-<section className="relative border-b border-white/10 bg-black">
+<section
+ className="relative border-b border-white/10 bg-black">
 
     <div
 className="
@@ -3428,6 +3429,7 @@ xl:gap-20
             ========================= */}
 
             <div
+            id="section04"
 className="
 col-span-1
 xl:col-span-9
@@ -3545,6 +3547,7 @@ xl:col-span-9
             ========================= */}
 
             <div
+            id="section05"
 className="
 col-span-1
 xl:col-span-11

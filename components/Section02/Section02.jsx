@@ -742,7 +742,9 @@ export default function Section02() {
         SECTION 02 - PART 5.1
 ===================================================== */}
 
-<section className="relative border-b border-white/10 bg-black">
+<section
+id="section02"
+className="relative border-b border-white/10 bg-black">
 
   <div className="
 w-full

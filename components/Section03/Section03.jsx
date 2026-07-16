@@ -660,7 +660,9 @@ export default function Section03() {
         SECTION 03 - PART 6.1
 ===================================================== */}
 
-<section className="relative border-b border-white/10 bg-black">
+<section 
+id="section03"
+className="relative border-b border-white/10 bg-black">
 
     <div
   className="
