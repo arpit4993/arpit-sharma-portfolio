@@ -154,7 +154,7 @@ return () => {};
 
   <Link href="/#experience">Experience</Link>
 
-  <Link href="/#services">Services</Link>
+  <Link href="/#services">Core Expertise</Link>
 
   <Link href="/#portfolio">Portfolio</Link>
 
@@ -219,7 +219,7 @@ Experience
 href="/#services"
 onClick={()=>setMobileMenu(false)}
 >
-Services
+Core Expertise
 </Link>
 
 <Link
