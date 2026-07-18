@@ -433,14 +433,14 @@ const snapshot = await getDocs(q);
       fetchProjects();
 
     } catch (error) {
+  console.error("Full Error:", error);
 
-      console.log(error);
-
-      alert(
-        "Something went wrong."
-      );
-
-    }
+  alert(
+    error?.message ||
+    error?.toString() ||
+    "Unknown Error"
+  );
+}
 
     setLoading(false);
 
