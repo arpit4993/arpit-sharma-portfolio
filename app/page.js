@@ -4,6 +4,9 @@ import { useEffect, useState } from "react"
 
 import { Menu, X } from "lucide-react";
 
+import useEmblaCarousel from "embla-carousel-react";
+import AutoScroll from "embla-carousel-auto-scroll";
+
 import {
   collection,
   getDocs,
@@ -45,6 +48,34 @@ export default function HomePage() {
   const [imageDirection, setImageDirection] =
   useState("")
 
+  const [scale, setScale] = useState(1)
+
+  const [translate, setTranslate] = useState({
+    x: 0,
+    y: 0,
+  })
+
+  const [isDragging, setIsDragging] = useState(false)
+
+  const [dragStart, setDragStart] = useState({
+    x: 0,
+    y: 0,
+  })
+
+  const [emblaRef] = useEmblaCarousel(
+  {
+    loop: true,
+    dragFree: true,
+  },
+  [
+    AutoScroll({
+      speed: 1,
+      stopOnInteraction: false,
+      stopOnMouseEnter: false,
+    }),
+  ]
+);
+  
   useEffect(() => {
     const animateCounter = (
       setter,
@@ -434,6 +465,55 @@ init();
 
   )
 
+  const handleWheel = (e) => {
+  e.preventDefault()
+
+  const sensitivity = 0.001
+
+  setScale((prev) => {
+    const next = prev - e.deltaY * sensitivity
+    return Math.min(Math.max(next, 1), 5)
+  })
+}
+
+const resetZoom = () => {
+  setScale(1)
+  setTranslate({
+    x: 0,
+    y: 0,
+  })
+}
+
+const handleMouseDown = (e) => {
+
+  if (scale <= 1) return;
+
+  setIsDragging(true);
+
+  setDragStart({
+    x: e.clientX - translate.x,
+    y: e.clientY - translate.y,
+  });
+
+};
+
+const handleMouseMove = (e) => {
+
+  if (!isDragging || scale <= 1) return;
+
+  setTranslate({
+    x: e.clientX - dragStart.x,
+    y: e.clientY - dragStart.y,
+  });
+
+};
+
+const handleMouseUp = () => {
+
+  setIsDragging(false);
+
+};
+
   return (
     <main
       id="top"
@@ -478,16 +558,6 @@ init();
           }
         }
 
-        @keyframes marqueeMove {
-          from {
-            transform: translateX(0);
-          }
-
-          to {
-            transform: translateX(-50%);
-          }
-        }
-
         .fade-up {
           animation: fadeUp 1s ease forwards;
         }
@@ -502,20 +572,6 @@ init();
           overflow: hidden;
           white-space: nowrap;
           display: inline-block;
-        }
-
-        .marquee-wrapper {
-          overflow: hidden;
-          width: 100%;
-          position: relative;
-        }
-
-        .marquee-track {
-          display: flex;
-          align-items: center;
-          gap: 28px;
-          width: max-content;
-          animation: marqueeMove 30s linear infinite;
         }
 
         .divider {
@@ -820,36 +876,54 @@ AI Integration
         </div>
       </section>
 
-      <section className="border-y border-white/10 py-8">
-        <div className="marquee-wrapper">
-          <div className="marquee-track">
+      <section className="border-y border-white/10 py-8 overflow-hidden">
 
-  <img src="/brands/mytvs.png" alt="myTVS" className="h-12 w-auto" />
-  <span className="divider"></span>
+  <div className="overflow-hidden" ref={emblaRef}>
 
-  <img src="/brands/microsoft.png" alt="Microsoft" className="h-12 w-auto" />
-  <span className="divider"></span>
+    <div className="flex">
 
-  <img src="/brands/accenture.png" alt="Accenture" className="h-12 w-auto" />
-  <span className="divider"></span>
+      {[
+        "mytvs",
+        "microsoft",
+        "accenture",
+        "cognizant",
+        "hitachi",
+        "avanade",
+        "chaayos",
+        "noon",
 
-  <img src="/brands/cognizant.png" alt="Cognizant" className="h-12 w-auto" />
-  <span className="divider"></span>
+        "mytvs",
+        "microsoft",
+        "accenture",
+        "cognizant",
+        "hitachi",
+        "avanade",
+        "chaayos",
+        "noon",
+      ].map((brand, index) => (
 
-  <img src="/brands/hitachi.png" alt="Hitachi" className="h-12 w-auto" />
-  <span className="divider"></span>
+        <div
+          key={index}
+          className="flex-[0_0_auto] flex items-center gap-7 px-7"
+        >
 
-  <img src="/brands/avanade.png" alt="Avanade" className="h-12 w-auto" />
-  <span className="divider"></span>
+          <img
+            src={`/brands/${brand}.png`}
+            alt={brand}
+            className="h-12 w-auto shrink-0"
+          />
 
-  <img src="/brands/chaayos.png" alt="Chaayos" className="h-12 w-auto" />
-  <span className="divider"></span>
+          <span className="w-px h-7 bg-white/20"></span>
 
-  <img src="/brands/noon.png" alt="Noon" className="h-12 w-auto" />
-
-</div>
         </div>
-      </section>
+
+      ))}
+
+    </div>
+
+  </div>
+
+</section>
 
       <section
         id="about"
@@ -1121,7 +1195,7 @@ AI Integration
 
       ) : (
 
-      <div className="columns-1 md:columns-2 gap-6 space-y-6">
+      <div className="flex flex-col gap-6">
 
             {[...(selectedProject.images || [])]
               .reverse()
@@ -1151,7 +1225,10 @@ AI Integration
 
                   setCurrentImageIndex(actualIndex)
 
+                  resetZoom()
+
                   setFullscreenImage(true)
+
                 }}
               />
 
@@ -1166,8 +1243,6 @@ AI Integration
   </div>
 
 )}
-
-
 
 {/* IMAGE FULLSCREEN */}
 
@@ -1212,17 +1287,33 @@ AI Integration
     {/* IMAGE */}
 
     <img
-      src={
-  selectedProject.images[currentImageIndex]
+  src={selectedProject.images[currentImageIndex]}
+  alt=""
+  onWheel={handleWheel}
+  onMouseDown={handleMouseDown}
+onMouseMove={handleMouseMove}
+onMouseUp={handleMouseUp}
+onMouseLeave={handleMouseUp}
+  draggable={false}
+  style={{
+    transform: `translate(${translate.x}px, ${translate.y}px) scale(${scale})`,
+    transition: isDragging ? "none" : "transform 0.15s ease-out",
+    transformOrigin: "center center",
+  }}
+  className={`max-w-full max-h-[85vh] lg:max-h-full object-contain rounded-2xl lg:rounded-[20px] select-none
+    ${
+scale > 1
+  ? isDragging
+      ? "cursor-grabbing"
+      : "cursor-grab"
+  : "cursor-zoom-in"
 }
-      alt=""
-      className={`max-w-full max-h-[85vh] lg:max-h-full object-contain rounded-2xl lg:rounded-[20px]
-${
-  imageDirection === "right"
-    ? "image-slide-right"
-    : "image-slide-left"
-}`}
-    />
+  ${
+    imageDirection === "right"
+      ? "image-slide-right"
+      : "image-slide-left"
+  }`}
+/>
 
     {/* RIGHT */}
 
@@ -1236,7 +1327,12 @@ ${
       ? 0
       : prev + 1
   )
+  
+  resetZoom()
+
 }}
+
+
       className="absolute right-3 lg:right-6 top-1/2 -translate-y-1/2
       w-11 h-11 lg:w-14 lg:h-14 rounded-full border border-white/10
       text-3xl hover:bg-white hover:text-black
