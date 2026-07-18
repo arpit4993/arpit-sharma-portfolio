@@ -940,7 +940,7 @@ AI Integration
   className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10"
 >
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-10 lg:mb-16">Services</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-10 lg:mb-16">Core Expertise</h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
             {services.map((service) => (
