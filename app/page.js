@@ -713,7 +713,7 @@ Experience
 href="#services"
 onClick={()=>setMobileMenu(false)}
 >
-Services
+Core Expertise
 </a>
 
 <a
