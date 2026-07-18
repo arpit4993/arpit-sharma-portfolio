@@ -10,6 +10,9 @@ import {
   deleteDoc,
   doc,
   arrayRemove,
+  arrayUnion,
+  query,
+  where,
 } from "firebase/firestore";
 
 import { db } from "@/lib/firebase";
@@ -184,7 +187,7 @@ export default function PortfolioProjectsPage() {
 
         }
 
-        setImages(uploaded);
+        setImages(prev => [...prev, ...uploaded]);
 
       } catch (error) {
 
@@ -223,7 +226,7 @@ export default function PortfolioProjectsPage() {
 
         }
 
-        setVideos(uploaded);
+        setVideos(prev => [...prev, ...uploaded]);
 
       } catch (error) {
 
@@ -324,18 +327,27 @@ export default function PortfolioProjectsPage() {
 
   const handleSave = async () => {
 
-    if (
-      !title ||
-      !description ||
-      !category ||
-      !coverImage
-    ) {
+    const q = query(
+  collection(db, "portfolioProjects"),
+  where("category", "==", category)
+);
 
-      alert("Please fill all fields.");
+const snapshot = await getDocs(q);
 
-      return;
+const isExisting = !snapshot.empty;
 
-    }
+if (
+  !isExisting &&
+  (
+    !title ||
+    !description ||
+    !category ||
+    !coverImage
+  )
+) {
+  alert("Please fill all fields.");
+  return;
+}
 
     if (
       category !== "video-editing" &&
@@ -367,34 +379,54 @@ export default function PortfolioProjectsPage() {
 
       setLoading(true);
 
-      await addDoc(
+      const q = query(
+  collection(db, "portfolioProjects"),
+  where("category", "==", category)
+);
 
-        collection(
-          db,
-          "portfolioProjects"
-        ),
+const snapshot = await getDocs(q);
 
-        {
+      if (!snapshot.empty) {
 
-          title,
+  const projectRef = doc(
+    db,
+    "portfolioProjects",
+    snapshot.docs[0].id
+  );
 
-          description,
+  if (category === "video-editing") {
 
-          category,
+    await updateDoc(projectRef, {
+      videos: arrayUnion(...videos),
+    });
 
-          coverImage,
+  } else {
 
-          images,
+    await updateDoc(projectRef, {
+      images: arrayUnion(...images),
+    });
 
-          videos,
+  }
 
-        }
+  alert("Project updated successfully.");
 
-      );
+} else {
 
-      alert(
-        "Project added successfully."
-      );
+  await addDoc(
+    collection(db, "portfolioProjects"),
+    {
+      title,
+      description,
+      category,
+      coverImage,
+      images,
+      videos,
+    }
+  );
+
+  alert("Project added successfully.");
+
+}
 
       resetForm();
 

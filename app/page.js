@@ -647,7 +647,7 @@ init();
 
   <a href="#experience">Experience</a>
 
-  <a href="#services">Services</a>
+  <a href="#services">Core Expertise</a>
 
   <a href="#portfolio">Portfolio</a>
 
@@ -822,27 +822,32 @@ AI Integration
 
       <section className="border-y border-white/10 py-8">
         <div className="marquee-wrapper">
-          <div className="marquee-track text-xl md:text-3xl font-bold uppercase tracking-[0.2em]">
-            <span>Brand Identity</span>
-            <span className="divider"></span>
-            <span>Social Media Design</span>
-            <span className="divider"></span>
-            <span>Packaging Design</span>
-            <span className="divider"></span>
-            <span>Advertising Creatives</span>
-            <span className="divider"></span>
-            <span>Logo Design</span>
-            <span className="divider"></span>
-            <span>Thumbnail Design</span>
-            <span className="divider"></span>
-            <span>Product Retouching</span>
-            <span className="divider"></span>
-            <span>UI Design</span>
-            <span className="divider"></span>
-            <span>Motion Graphics</span>
-            <span className="divider"></span>
-            <span>Print Design</span>
-          </div>
+          <div className="marquee-track">
+
+  <img src="/brands/mytvs.png" alt="myTVS" className="h-12 w-auto" />
+  <span className="divider"></span>
+
+  <img src="/brands/microsoft.png" alt="Microsoft" className="h-12 w-auto" />
+  <span className="divider"></span>
+
+  <img src="/brands/accenture.png" alt="Accenture" className="h-12 w-auto" />
+  <span className="divider"></span>
+
+  <img src="/brands/cognizant.png" alt="Cognizant" className="h-12 w-auto" />
+  <span className="divider"></span>
+
+  <img src="/brands/hitachi.png" alt="Hitachi" className="h-12 w-auto" />
+  <span className="divider"></span>
+
+  <img src="/brands/avanade.png" alt="Avanade" className="h-12 w-auto" />
+  <span className="divider"></span>
+
+  <img src="/brands/chaayos.png" alt="Chaayos" className="h-12 w-auto" />
+  <span className="divider"></span>
+
+  <img src="/brands/noon.png" alt="Noon" className="h-12 w-auto" />
+
+</div>
         </div>
       </section>
 
