@@ -515,7 +515,7 @@ init();
           align-items: center;
           gap: 28px;
           width: max-content;
-          animation: marqueeMove 60s linear infinite;
+          animation: marqueeMove 30s linear infinite;
         }
 
         .divider {
