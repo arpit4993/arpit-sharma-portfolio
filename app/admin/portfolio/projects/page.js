@@ -83,10 +83,23 @@ export default function PortfolioProjectsPage() {
 
       );
 
-    const data =
-      await response.json();
+      const data = await response.json();
 
-    return data.secure_url;
+console.log("Cloudinary Response:", data);
+
+if (!response.ok) {
+  throw new Error(
+    data.error?.message || "Cloudinary Upload Failed"
+  );
+}
+
+if (!data.secure_url) {
+  throw new Error(
+    "secure_url not found. Cloudinary did not return an image URL."
+  );
+}
+
+return data.secure_url;
 
   };
 
@@ -144,6 +157,8 @@ export default function PortfolioProjectsPage() {
         const url =
           await uploadImage(file);
 
+          console.log("Gallery URL:", url);
+
         setCoverImage(url);
 
       } catch (error) {
@@ -182,6 +197,10 @@ export default function PortfolioProjectsPage() {
 
           const url =
             await uploadImage(file);
+
+          if (!url) {
+  throw new Error("Gallery image URL is undefined.");
+}
 
           uploaded.push(url);
 
