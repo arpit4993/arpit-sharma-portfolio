@@ -369,9 +369,9 @@ if (
 }
 
     if (
-      category !== "video-editing" &&
-      images.length === 0
-    ) {
+  !isVideoCategory &&
+  images.length === 0
+){
 
       alert(
         "Please upload gallery images."
@@ -382,9 +382,9 @@ if (
     }
 
     if (
-      category === "video-editing" &&
-      videos.length === 0
-    ) {
+  isVideoCategory &&
+  videos.length === 0
+) {
 
       alert(
         "Please upload videos."
@@ -413,7 +413,7 @@ const snapshot = await getDocs(q);
     snapshot.docs[0].id
   );
 
-  if (category === "video-editing") {
+  if (isVideoCategory) {
 
     await updateDoc(projectRef, {
       videos: arrayUnion(...videos),
@@ -727,6 +727,16 @@ const snapshot = await getDocs(q);
       });
 
     };
+
+    const selectedCategory = categories.find(
+  (item) => item.slug === category
+);
+
+const isVideoCategory =
+  /(video|motion)/i.test(
+    `${selectedCategory?.name || ""} ${selectedCategory?.slug || ""}`
+  );
+
       return (
 
     <main className="max-w-7xl">
@@ -856,7 +866,7 @@ const snapshot = await getDocs(q);
         </div>
                 {/* GALLERY IMAGES */}
 
-        {category !== "video-editing" && (
+        {!isVideoCategory && (
 
           <div className="mb-10">
 
@@ -896,7 +906,7 @@ const snapshot = await getDocs(q);
 
         {/* VIDEOS */}
 
-        {category === "video-editing" && (
+        {isVideoCategory && (
 
           <div className="mb-10">
 
@@ -1017,8 +1027,7 @@ const snapshot = await getDocs(q);
 
                 {/* GALLERY */}
 
-                {project.category !==
-                  "video-editing" && (
+                {!/(video|motion)/i.test(project.category || "") && (
 
                   <div className="grid grid-cols-3 gap-3 mb-8">
 
@@ -1063,8 +1072,7 @@ const snapshot = await getDocs(q);
 
                 {/* VIDEOS */}
 
-                {project.category ===
-                  "video-editing" && (
+                {/(video|motion)/i.test(project.category || "") && (
 
                   <div className="grid gap-4 mb-8">
 
