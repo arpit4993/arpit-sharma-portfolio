@@ -514,6 +514,15 @@ const handleMouseUp = () => {
 
 };
 
+const selectedCategory = categories.find(
+  (item) => item.slug === selectedProject?.category
+);
+
+const isSelectedVideoCategory =
+  /(video|motion)/i.test(
+    `${selectedCategory?.name || ""} ${selectedCategory?.slug || ""}`
+  );
+
   return (
     <main
       id="top"
@@ -1172,8 +1181,7 @@ AI Integration
 
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-8 lg:py-16">
 
-      {selectedProject.category ===
-        "video-editing" ? (
+      {isSelectedVideoCategory ? (
 
         <div className="grid md:grid-cols-2 gap-8">
 
