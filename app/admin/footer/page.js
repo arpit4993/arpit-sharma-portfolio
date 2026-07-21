@@ -23,9 +23,6 @@ export default function FooterPage() {
   const [description, setDescription] =
     useState("");
 
-  const [instagram, setInstagram] =
-    useState("");
-
   const [behance, setBehance] =
     useState("");
 
@@ -73,10 +70,6 @@ export default function FooterPage() {
 
           setDescription(
             data.description || ""
-          );
-
-          setInstagram(
-            data.instagram || ""
           );
 
           setBehance(
@@ -257,26 +250,6 @@ export default function FooterPage() {
             }
             placeholder="Graphic Designer focused on branding..."
             className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none resize-none"
-          />
-
-        </div>
-
-        {/* INSTAGRAM */}
-
-        <div className="mb-8">
-
-          <label className="block mb-3 text-white/60">
-            Instagram URL
-          </label>
-
-          <input
-            type="text"
-            value={instagram}
-            onChange={(e) =>
-              setInstagram(e.target.value)
-            }
-            placeholder="https://instagram.com/username"
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none"
           />
 
         </div>
