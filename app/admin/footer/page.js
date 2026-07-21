@@ -252,16 +252,6 @@ export default function FooterPage() {
 
         </div>
 
-        {/* INSTAGRAM */}
-
-        <div className="mb-8">
-
-          <label className="block mb-3 text-white/60">
-            Instagram URL
-          </label>
-
-        </div>
-
         {/* BEHANCE */}
 
         <div className="mb-8">
