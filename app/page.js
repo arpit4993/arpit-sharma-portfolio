@@ -1403,13 +1403,6 @@ scale > 1
         </div>
 
         <div className="flex items-center gap-5 flex-wrap">
-          <a
-            href={footer?.instagram || "#"}
-            target="_blank"
-            className="w-11 h-11 sm:w-14 sm:h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300"
-          >
-            IG
-          </a>
 
           <a
             href={footer?.behance || "#"}
